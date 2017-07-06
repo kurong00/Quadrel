@@ -12,15 +12,30 @@ public class MapManager : Singleton<MapManager> {
 	private GameObject mapTile;//地板
 	private List<GameObject[]> mapList = new List<GameObject[]>();
 	private float bottomTileLength = Mathf.Sqrt (2) * 0.254f;
+	/// <summary>
+	/// 地图塌陷相关
+	/// </summary>
+	private float tileFallTime = 0.2f;
+	private int mapIndex = 0;
+	private float offSetZ = 0f;
+	/// <summary>
+	/// 主角相关
+	/// </summary>
+	private GameObject player;
 
 	void Start () {
 		mapWall = Resources.Load ("wall") as GameObject;
 		mapTile = Resources.Load ("tile") as GameObject;
 		CreateMap ();
+		player = GameObject.FindWithTag ("Player");
 	}
 
 	void Update () {
-		
+		if (mapList.Count - 4 < player.GetComponent<PlayerControl> ().z) {
+			offSetZ = mapList [mapList.Count - 1] [0].GetComponent<Transform> ().position.z + bottomTileLength / 2;
+			CreateMap ();
+			Debug.Log (mapList.Count);
+		}
 	}
 
 	/// <summary>
@@ -32,7 +47,7 @@ public class MapManager : Singleton<MapManager> {
 			GameObject[] mapItem1 = new GameObject[6];
 			for (int j = 0; j < 6; j++) {
 				//第一种瓷砖的出生位置
-				Vector3 initPos = new Vector3 (j * bottomTileLength, 0, i * bottomTileLength);
+				Vector3 initPos = new Vector3 (j * bottomTileLength, 0, offSetZ + i * bottomTileLength);
 				Vector3 initRota = new Vector3 (-90, 45, 0);
 				GameObject initItem = null;
 				if (j == 0 || j == 5) {
@@ -50,7 +65,7 @@ public class MapManager : Singleton<MapManager> {
 			GameObject[] mapItem2 = new GameObject[5];
 			for (int j = 0; j < 5; j++) {
 				//第二种瓷砖的出生位置
-				Vector3 initPos = new Vector3 (j * bottomTileLength + bottomTileLength / 2, 0, i * bottomTileLength + bottomTileLength / 2);
+				Vector3 initPos = new Vector3 (j * bottomTileLength + bottomTileLength / 2, 0, offSetZ + i * bottomTileLength + bottomTileLength / 2);
 				Vector3 initRota = new Vector3 (-90, 45, 0);
 				GameObject initItem = GameObject.Instantiate (mapTile, initPos, Quaternion.Euler (initRota)); 
 				initItem.GetComponent<Transform> ().Find ("tile_plane").GetComponent<MeshRenderer> ()
@@ -60,10 +75,10 @@ public class MapManager : Singleton<MapManager> {
 			mapList.Add (mapItem2);
 		}
 		//测试使用，修改名字
-		for (int i = 0; i < mapList.Count; i++)
+		/*for (int i = 0; i < mapList.Count; i++)
 			for (int j = 0; j < mapList [i].Length; j++) {
 				mapList [i] [j].name = (i + 1) + "--" + (j + 1);
-			}
+			}*/
 	}
 
 	public List<GameObject[]> GetMapList(){
@@ -73,4 +88,31 @@ public class MapManager : Singleton<MapManager> {
 		}
 		return mapList;
 	}
+		
+	public void StartTileDown(){
+		StartCoroutine ("TileDown");
+	}
+
+	public void StopTileDown(){
+		StopCoroutine ("TileDown");
+	}
+
+	private IEnumerator TileDown(){
+		while (true) {
+			yield return new WaitForSeconds (tileFallTime);
+			for (int i = 0; i < mapList [mapIndex].Length; i++) {
+				Rigidbody tempRigidbody = mapList [mapIndex] [i].AddComponent<Rigidbody> ();
+				tempRigidbody.angularVelocity = new Vector3 (Random.Range (0f, 2f), Random.Range (0f, 2f), Random.Range (0f, 2f));
+				GameObject.Destroy (mapList [mapIndex] [i], 1f);
+			}
+			if (mapIndex == player.GetComponent<PlayerControl>().z) {
+				StopTileDown ();
+				CameraManager.Instance ().startFollow = false;
+				player.AddComponent<Rigidbody2D> ();
+				Destroy (player, 2f);
+			}
+			mapIndex++;
+		}
+	}
+		
 }

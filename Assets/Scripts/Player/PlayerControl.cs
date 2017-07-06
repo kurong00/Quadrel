@@ -6,7 +6,8 @@ using FrameWork;
 public class PlayerControl : MonoBehaviour {
 
 	private bool isDead = false;
-	private int x = 3,z = 2;
+	[HideInInspector]
+	public int x = 3,z = 2;
 	private GameColor playerPosColor;
 	private MapManager mapManager;
 	void Start () {
@@ -19,6 +20,7 @@ public class PlayerControl : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Space)){
 			CameraManager.Instance ().startFollow = true;
 			SetPlayerPosition ();
+			mapManager.StartTileDown ();
 		}
 		PlayerControll ();
 	}

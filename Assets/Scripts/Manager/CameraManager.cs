@@ -19,8 +19,10 @@ public class CameraManager : Singleton<CameraManager> {
 
 	void Update () {
 		if (startFollow) {
-			Vector3 nextPos = new Vector3 (gameObject.transform.position.x, player.position.y + 1.5f, player.position.z);
-			gameObject.transform.position = Vector3.Lerp (gameObject.transform.position, nextPos, Time.deltaTime);
+			Vector3 nextPos = new Vector3 (gameObject.transform.position.x, 
+				player.position.y + 1.5f, player.position.z);
+			gameObject.transform.position = Vector3.Lerp 
+				(gameObject.transform.position, nextPos, Time.deltaTime);
 		}
 	}
 		
