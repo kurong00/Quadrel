@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FrameWork;
 
-public class MapManager : MonoBehaviour {
+public class MapManager : Singleton<MapManager> {
 
 	/// <summary>
 	/// 与地图相关：
@@ -26,6 +27,7 @@ public class MapManager : MonoBehaviour {
 	/// 初始化地图
 	/// </summary>
 	void CreateMap(){
+		GameColor mapColor = ColorManager.Instance ().SelectColor (ColorManager.ScenesType.MONDAY);
 		for (int i = 0; i < 10; i++) {
 			GameObject[] mapItem1 = new GameObject[6];
 			for (int j = 0; j < 6; j++) {
@@ -36,12 +38,11 @@ public class MapManager : MonoBehaviour {
 				if (j == 0 || j == 5) {
 					//墙壁的颜色
 					initItem = GameObject.Instantiate (mapWall, initPos, Quaternion.Euler (initRota));
-					initItem.GetComponent<MeshRenderer> ().material.color = 
-						ColorManager.Instance ().SelectColor (ColorManager.ScenesType.MONDAY).colorOfWall;
+					initItem.GetComponent<MeshRenderer> ().material.color = mapColor.colorOfWall;
 				} else {
 					initItem = GameObject.Instantiate (mapTile, initPos, Quaternion.Euler (initRota));
 					initItem.GetComponent<Transform> ().Find ("tile_plane").GetComponent<MeshRenderer> ()
-						.material.color = ColorManager.Instance ().SelectColor (ColorManager.ScenesType.MONDAY).colorOfTileOne;
+						.material.color = mapColor.colorOfTileOne;
 				}
 				mapItem1 [j] = initItem;
 			}
@@ -53,14 +54,23 @@ public class MapManager : MonoBehaviour {
 				Vector3 initRota = new Vector3 (-90, 45, 0);
 				GameObject initItem = GameObject.Instantiate (mapTile, initPos, Quaternion.Euler (initRota)); 
 				initItem.GetComponent<Transform> ().Find ("tile_plane").GetComponent<MeshRenderer> ()
-					.material.color = ColorManager.Instance ().SelectColor (ColorManager.ScenesType.MONDAY).colorOfTileTwo;
+					.material.color = mapColor.colorOfTileTwo;
 				mapItem2 [j] = initItem;
 			}
 			mapList.Add (mapItem2);
 		}
+		//测试使用，修改名字
 		for (int i = 0; i < mapList.Count; i++)
 			for (int j = 0; j < mapList [i].Length; j++) {
 				mapList [i] [j].name = (i + 1) + "--" + (j + 1);
 			}
+	}
+
+	public List<GameObject[]> GetMapList(){
+		if (mapList.Count <= 0) {
+			Debug.Log ("create map failed");
+			CreateMap ();
+		}
+		return mapList;
 	}
 }

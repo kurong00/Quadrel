@@ -10,6 +10,7 @@ GameObject:
   - component: {fileID: 449440}
   - component: {fileID: 3361172}
   - component: {fileID: 2365204}
+  - component: {fileID: 114146058698636088}
   m_Layer: 0
   m_Name: cube_mushroom
   m_TagString: Untagged
@@ -23,13 +24,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 133654}
-  m_LocalRotation: {x: -4.32978e-17, y: 0.7071067, z: 0.7071068, w: -4.3297806e-17}
-  m_LocalPosition: {x: 2.041, y: 0.127, z: -2.691}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.9, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -89.980194, y: -180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2365204
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -80,3 +81,14 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 133654}
   m_IsPrefabParent: 1
+--- !u!114 &114146058698636088
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 133654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9c13b3a3363874499d945fa085a4e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

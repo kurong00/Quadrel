@@ -30,7 +30,7 @@ namespace FrameWork{
 				}
 			} 
 			else
-				Debug.Log ("already exit" + instance.name + " in the game");
+				Debug.Log ("already exit " + instance.name + " in the game");
 			return instance;
 		}
 		protected virtual void OnDestory()
