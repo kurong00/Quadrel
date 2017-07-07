@@ -34,7 +34,6 @@ public class MapManager : Singleton<MapManager> {
 		if (mapList.Count - 4 < player.GetComponent<PlayerControl> ().z) {
 			offSetZ = mapList [mapList.Count - 1] [0].GetComponent<Transform> ().position.z + bottomTileLength / 2;
 			CreateMap ();
-			Debug.Log (mapList.Count);
 		}
 	}
 
