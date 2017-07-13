@@ -10,7 +10,8 @@ public class MapManager : Singleton<MapManager> {
 	/// </summary>
 	private GameObject mapWall;
 	private GameObject mapTile;
-	private List<GameObject[]> mapList = new List<GameObject[]>();
+    private GameColor mapColor;
+    private List<GameObject[]> mapList = new List<GameObject[]>();
 	private float bottomTileLength = Mathf.Sqrt (2) * 0.254f;
 	/// <summary>
 	/// 地图塌陷相关
@@ -27,7 +28,8 @@ public class MapManager : Singleton<MapManager> {
     void Start () {
 		mapWall = Resources.Load ("wall") as GameObject;
 		mapTile = Resources.Load ("tile") as GameObject;
-		CreateMap ();
+        mapColor = ColorManager.Instance().SelectColor(ColorManager.ScenesType.MONDAY);
+        CreateMap ();
 		player = GameObject.FindWithTag ("Player");
 	}
 
@@ -42,7 +44,6 @@ public class MapManager : Singleton<MapManager> {
 	/// 初始化地图
 	/// </summary>
 	void CreateMap(){
-		GameColor mapColor = ColorManager.Instance ().SelectColor (ColorManager.ScenesType.MONDAY);
 		for (int i = 0; i < 10; i++) {
 			GameObject[] mapItem1 = new GameObject[6];
 			for (int j = 0; j < 6; j++) {
@@ -112,8 +113,8 @@ public class MapManager : Singleton<MapManager> {
 			for (int i = 0; i < mapList [mapIndex].Length; i++) {
 				Rigidbody tempRigidbody = mapList [mapIndex] [i].AddComponent<Rigidbody> ();
 				tempRigidbody.angularVelocity = new Vector3 (Random.Range (0f, 2f), Random.Range (0f, 2f), Random.Range (0f, 2f));
-                PoolManager.PushObjectToPool(mapList[mapIndex][i],1.0f);
-                //GameObject.Destroy (mapList [mapIndex] [i], 1f);
+                //PoolManager.PushObjectToPool(mapList[mapIndex][i],1.0f);
+                GameObject.Destroy (mapList [mapIndex] [i], 1f);
 			}
 			if (mapIndex == player.GetComponent<PlayerControl>().z) {
 				StopTileDown ();
