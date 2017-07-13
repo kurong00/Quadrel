@@ -11,6 +11,7 @@ public class MapManager : Singleton<MapManager> {
 	private GameObject mapWall;
 	private GameObject mapTile;
     private GameColor mapColor;
+    private GameObject initItem = null;
     private List<GameObject[]> mapList = new List<GameObject[]>();
 	private float bottomTileLength = Mathf.Sqrt (2) * 0.254f;
 	/// <summary>
@@ -50,16 +51,17 @@ public class MapManager : Singleton<MapManager> {
 				//第一种瓷砖的出生位置
 				Vector3 initPos = new Vector3 (j * bottomTileLength, 0, offSetZ + i * bottomTileLength);
 				Vector3 initRota = new Vector3 (-90, 45, 0);
-				GameObject initItem = null;
 				if (j == 0 || j == 5) {
                     //墙壁的颜色
-                    initItem = PoolManager.PullObjectFromPool(mapWall,20);
+                    initItem = PoolManager.PullObjectFromPool(mapWall,40);
+                    initItem.SetActive(true);
                     initItem.transform.position = initPos;
                     initItem.transform.rotation = Quaternion.Euler(initRota);
 					//initItem = GameObject.Instantiate (mapWall, initPos, Quaternion.Euler (initRota));
 					initItem.GetComponent<MeshRenderer> ().material.color = mapColor.colorOfWall;
 				} else {
-                    initItem = PoolManager.PullObjectFromPool(mapTile,90);
+                    initItem = PoolManager.PullObjectFromPool(mapTile,200);
+                    initItem.SetActive(true);
                     initItem.transform.position = initPos;
                     initItem.transform.rotation = Quaternion.Euler(initRota);
                     //initItem = GameObject.Instantiate (mapTile, initPos, Quaternion.Euler (initRota));
@@ -74,7 +76,8 @@ public class MapManager : Singleton<MapManager> {
 				//第二种瓷砖的出生位置
 				Vector3 initPos = new Vector3 (j * bottomTileLength + bottomTileLength / 2, 0, offSetZ + i * bottomTileLength + bottomTileLength / 2);
 				Vector3 initRota = new Vector3 (-90, 45, 0);
-                GameObject initItem = PoolManager.PullObjectFromPool(mapTile);
+                initItem = PoolManager.PullObjectFromPool(mapTile,200);
+                initItem.SetActive(true);
                 initItem.transform.position = initPos;
                 initItem.transform.rotation = Quaternion.Euler(initRota);
                 //GameObject initItem = GameObject.Instantiate (mapTile, initPos, Quaternion.Euler (initRota)); 
@@ -113,8 +116,8 @@ public class MapManager : Singleton<MapManager> {
 			for (int i = 0; i < mapList [mapIndex].Length; i++) {
 				Rigidbody tempRigidbody = mapList [mapIndex] [i].AddComponent<Rigidbody> ();
 				tempRigidbody.angularVelocity = new Vector3 (Random.Range (0f, 2f), Random.Range (0f, 2f), Random.Range (0f, 2f));
-                //PoolManager.PushObjectToPool(mapList[mapIndex][i],1.0f);
-                GameObject.Destroy (mapList [mapIndex] [i], 1f);
+                PoolManager.PushObjectToPool(mapList[mapIndex][i], 1.0f);
+                //GameObject.Destroy (mapList [mapIndex] [i], 1f);
 			}
 			if (mapIndex == player.GetComponent<PlayerControl>().z) {
 				StopTileDown ();

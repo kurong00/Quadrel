@@ -43,7 +43,7 @@ public class PoolManager : Singleton<PoolManager> {
         return objectPool;
     }
 
-    private static ObjectPool GetObjectPool(GameObject prefab, int num=100, Vector3 pos = new Vector3(), Quaternion rotate = new Quaternion())
+    private static ObjectPool GetObjectPool(GameObject prefab, int num=1000, Vector3 pos = new Vector3(), Quaternion rotate = new Quaternion())
     {
         ObjectPool objectPool = null;
         int count = prefabList.Count;
@@ -51,6 +51,7 @@ public class PoolManager : Singleton<PoolManager> {
         //判断集合中是否有预制体对应的对象池
         for(int i=0;i< prefabList.Count; i++)
         {
+            
             if (prefabID == prefabList[i].GetInstanceID())
             {
                 objectPool = objectPoolDictionary[prefabID];
@@ -61,7 +62,6 @@ public class PoolManager : Singleton<PoolManager> {
         if (objectPool == null)
         {
             objectPool = CreateObjectPool(prefab, num,pos, rotate);
-            Debug.Log("找不到对象池后，重新生成的");
         }
         return objectPool;
     }
@@ -72,7 +72,7 @@ public class PoolManager : Singleton<PoolManager> {
         GetObjectPool(prefab, pos, rotate);
     }*/
 
-    private static ObjectPool GetPoolByTransform(GameObject handleTransform)
+    private static ObjectPool GetPool(GameObject handleTransform)
     {
         if (transformDictionary.ContainsKey(handleTransform))
         {
@@ -84,7 +84,7 @@ public class PoolManager : Singleton<PoolManager> {
 
     public static void PushObjectToPool(GameObject handleTransform , float delayTime=0.0f)
     {
-        ObjectPool objectPool = GetPoolByTransform(handleTransform);
+        ObjectPool objectPool = GetPool(handleTransform);
         if (objectPool)
         {
             objectPool.PushObjectToPool(handleTransform,delayTime);

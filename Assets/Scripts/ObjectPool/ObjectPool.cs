@@ -40,7 +40,7 @@ public class ObjectPool : MonoBehaviour {
         {
             GameObject go = GameObject.Instantiate(prefab, pos, rotate);
             go.name = i + "";
-            go.SetActive(true);
+            go.SetActive(false);
             go.transform.SetParent(transform);
             idleLinkedList.AddFirst(go);
             poolDictionary.Add(go, this);
@@ -54,7 +54,7 @@ public class ObjectPool : MonoBehaviour {
         if (idleLinkedList.Count > 0)
         {
             myObject = idleLinkedList.First.Value;
-            myObject.gameObject.SetActive(true);
+            myObject.gameObject.SetActive(false);
             idleLinkedList.RemoveFirst();
             workingLinkedList.AddLast(myObject);
         }
@@ -79,15 +79,15 @@ public class ObjectPool : MonoBehaviour {
         while (delayTime > 0)
         {
             yield return null;
-            if(!objectTransform.gameObject.activeInHierarchy)
+            if(!objectTransform.activeInHierarchy)
             {
                 yield break;
             }
             delayTime -= Time.deltaTime;
         }
-        if (objectTransform.gameObject.activeSelf)
+        if (objectTransform.activeSelf)
         {
-            objectTransform.gameObject.SetActive(true);
+            objectTransform.SetActive(false);
             idleLinkedList.AddFirst(objectTransform);
             workingLinkedList.Remove(objectTransform);
         }
