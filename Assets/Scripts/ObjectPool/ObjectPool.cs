@@ -30,25 +30,20 @@ public class ObjectPool : MonoBehaviour {
     /// 初始化对象池
     /// </summary>
     public void InitObjectPool(GameObject prefab,Dictionary<GameObject, ObjectPool> poolDictionary,
-        Vector3 pos = new Vector3(),Quaternion rotate = new Quaternion())
+        Vector3 pos = new Vector3(),Quaternion rotate = new Quaternion(),int loadNum=30)
     {
         this.prefab = prefab;
         this.poolDictionary = poolDictionary;
         workingLinkedList = new LinkedList<GameObject>();
         idleLinkedList = new LinkedList<GameObject>();
-        /*for(int i = 0; i < loadNum; i++)
+        for(int i = 0; i < loadNum; i++)
         {
             GameObject go = GameObject.Instantiate(prefab, pos, rotate);
             go.SetActive(true);
             go.transform.SetParent(transform);
-            idleLinkedList.AddFirst(go.transform);
-            poolDictionary.Add(go.transform, this);
-        }*/
-        GameObject go = GameObject.Instantiate(prefab, pos, rotate);
-        go.SetActive(true);
-        go.transform.SetParent(transform);
-        idleLinkedList.AddFirst(go);
-        poolDictionary.Add(go, this);
+            idleLinkedList.AddFirst(go);
+            poolDictionary.Add(go, this);
+        }
     }
     
     public GameObject PullObjectFromObjectPool(Vector3 pos = new Vector3(), Quaternion rotate = new Quaternion())
