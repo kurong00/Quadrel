@@ -7,11 +7,11 @@ public class ObjectPool : MonoBehaviour {
     /// <summary>
     /// 对象池类，测试使用
     /// </summary>
-    public LinkedList<Transform> workingLinkedList;
-    public LinkedList<Transform> idleLinkedList;
+    public LinkedList<GameObject> workingLinkedList;
+    public LinkedList<GameObject> idleLinkedList;
     [HideInInspector]
     public GameObject prefab;
-    private Dictionary<Transform, ObjectPool> poolDictionary;
+    private Dictionary<GameObject, ObjectPool> poolDictionary;
     /// 单例模式
     private static ObjectPool instance;
 	
@@ -29,51 +29,56 @@ public class ObjectPool : MonoBehaviour {
     /// <summary>
     /// 初始化对象池
     /// </summary>
-    public void InitObjectPool(GameObject prefab,Dictionary<Transform,ObjectPool> poolDictionary,
-        int loadNum = 20,Vector3 pos = new Vector3(),Quaternion rotate = new Quaternion())
+    public void InitObjectPool(GameObject prefab,Dictionary<GameObject, ObjectPool> poolDictionary,
+        Vector3 pos = new Vector3(),Quaternion rotate = new Quaternion())
     {
         this.prefab = prefab;
         this.poolDictionary = poolDictionary;
-        workingLinkedList = new LinkedList<Transform>();
-        idleLinkedList = new LinkedList<Transform>();
-        for(int i = 0; i < loadNum; i++)
+        workingLinkedList = new LinkedList<GameObject>();
+        idleLinkedList = new LinkedList<GameObject>();
+        /*for(int i = 0; i < loadNum; i++)
         {
             GameObject go = GameObject.Instantiate(prefab, pos, rotate);
             go.SetActive(true);
             go.transform.SetParent(transform);
             idleLinkedList.AddFirst(go.transform);
             poolDictionary.Add(go.transform, this);
-        }
+        }*/
+        GameObject go = GameObject.Instantiate(prefab, pos, rotate);
+        go.SetActive(true);
+        go.transform.SetParent(transform);
+        idleLinkedList.AddFirst(go);
+        poolDictionary.Add(go, this);
     }
     
-    public Transform PopObjectFromObjectPool(Vector3 pos = new Vector3(), Quaternion rotate = new Quaternion())
+    public GameObject PullObjectFromObjectPool(Vector3 pos = new Vector3(), Quaternion rotate = new Quaternion())
     {
-        Transform objectTransform = null;
+        GameObject myObject = null;
         //假如对象池已经有对象了
         if (idleLinkedList.Count > 0)
         {
-            objectTransform = idleLinkedList.First.Value;
-            objectTransform.gameObject.SetActive(true);
+            myObject = idleLinkedList.First.Value;
+            myObject.gameObject.SetActive(true);
             idleLinkedList.RemoveFirst();
-            workingLinkedList.AddLast(objectTransform.transform);
+            workingLinkedList.AddLast(myObject);
         }
         //对象池中没有对象，生成实例
         else
         {
-            objectTransform = GameObject.Instantiate(prefab, pos, rotate).transform;
-            objectTransform.SetParent(transform);
-            workingLinkedList.AddLast(objectTransform.transform);
-            poolDictionary.Add(objectTransform, this);
+            myObject = GameObject.Instantiate(prefab, pos, rotate);
+            //myObject.SetParent(transform);
+            workingLinkedList.AddLast(myObject);
+            poolDictionary.Add(myObject, this);
         }
-        return objectTransform;
+        return myObject;
     }
 
-    public void PushObjectToPool(Transform objectTransform,float delayTime = 0.0f)
+    public void PushObjectToPool(GameObject objectTransform,float delayTime = 0.0f)
     {
         StartCoroutine("DelayPushObjectToPool", delayTime);
     }
 
-    IEnumerable DelayPushObjectToPool(Transform objectTransform, float delayTime = 0.0f)
+    IEnumerable DelayPushObjectToPool(GameObject objectTransform, float delayTime = 0.0f)
     {
         while (delayTime > 0)
         {
@@ -91,5 +96,14 @@ public class ObjectPool : MonoBehaviour {
             workingLinkedList.Remove(objectTransform);
         }
     }
-	
+
+    public void Dispose()
+    {
+        workingLinkedList.Clear();
+        idleLinkedList.Clear();
+        workingLinkedList = null;
+        idleLinkedList = null;
+        prefab = null;
+    }
+
 }

@@ -12,7 +12,12 @@ public class CameraManager : Singleton<CameraManager> {
 
 	private Vector3 initPos;
 
-	void Start () {
+    void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
+
+    void Start () {
 		initPos = gameObject.transform.position;
 		player = GameObject.FindWithTag ("Player").GetComponent<Transform>();
 	}

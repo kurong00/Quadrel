@@ -23,7 +23,8 @@ public class PlayerControl : MonoBehaviour {
 			mapManager.StartTileDown ();
 		}
 		PlayerControll ();
-	}
+
+    }
 
 	void PlayerControll(){
 		if(Input.GetKeyDown(KeyCode.A)){

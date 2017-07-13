@@ -6,10 +6,10 @@ using FrameWork;
 public class MapManager : Singleton<MapManager> {
 
 	/// <summary>
-	/// 与地图相关：
+	/// 生成地图相关
 	/// </summary>
-	private GameObject mapWall;//墙壁
-	private GameObject mapTile;//地板
+	private GameObject mapWall;
+	private GameObject mapTile;
 	private List<GameObject[]> mapList = new List<GameObject[]>();
 	private float bottomTileLength = Mathf.Sqrt (2) * 0.254f;
 	/// <summary>
@@ -18,6 +18,7 @@ public class MapManager : Singleton<MapManager> {
 	private float tileFallTime = 0.2f;
 	private int mapIndex = 0;
 	private float offSetZ = 0f;
+    private int mapTileDownDistance = 8;
 	/// <summary>
 	/// 主角相关
 	/// </summary>
@@ -31,7 +32,7 @@ public class MapManager : Singleton<MapManager> {
 	}
 
 	void Update () {
-		if (mapList.Count - 4 < player.GetComponent<PlayerControl> ().z) {
+		if (mapList.Count - mapTileDownDistance < player.GetComponent<PlayerControl> ().z) {
 			offSetZ = mapList [mapList.Count - 1] [0].GetComponent<Transform> ().position.z + bottomTileLength / 2;
 			CreateMap ();
 		}
@@ -50,8 +51,11 @@ public class MapManager : Singleton<MapManager> {
 				Vector3 initRota = new Vector3 (-90, 45, 0);
 				GameObject initItem = null;
 				if (j == 0 || j == 5) {
-					//墙壁的颜色
-					initItem = GameObject.Instantiate (mapWall, initPos, Quaternion.Euler (initRota));
+                    //墙壁的颜色
+                    initItem = PoolManager.PullObjectFromPool(mapWall);
+                    initItem.transform.position = initPos;
+                    initItem.transform.rotation = Quaternion.Euler(initRota);
+					//initItem = GameObject.Instantiate (mapWall, initPos, Quaternion.Euler (initRota));
 					initItem.GetComponent<MeshRenderer> ().material.color = mapColor.colorOfWall;
 				} else {
 					initItem = GameObject.Instantiate (mapTile, initPos, Quaternion.Euler (initRota));
@@ -102,7 +106,8 @@ public class MapManager : Singleton<MapManager> {
 			for (int i = 0; i < mapList [mapIndex].Length; i++) {
 				Rigidbody tempRigidbody = mapList [mapIndex] [i].AddComponent<Rigidbody> ();
 				tempRigidbody.angularVelocity = new Vector3 (Random.Range (0f, 2f), Random.Range (0f, 2f), Random.Range (0f, 2f));
-				GameObject.Destroy (mapList [mapIndex] [i], 1f);
+                PoolManager.PushObjectToPool(mapList[mapIndex][i]);
+                //GameObject.Destroy (mapList [mapIndex] [i], 1f);
 			}
 			if (mapIndex == player.GetComponent<PlayerControl>().z) {
 				StopTileDown ();
