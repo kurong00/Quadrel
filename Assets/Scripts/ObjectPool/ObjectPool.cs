@@ -71,23 +71,23 @@ public class ObjectPool : MonoBehaviour {
 
     public void PushObjectToPool(GameObject objectTransform,float delayTime)
     {
-        StartCoroutine("DelayPushObjectToPool", delayTime);
+        StartCoroutine(DelayPushObjectToPool(objectTransform, delayTime));
     }
 
-    IEnumerable DelayPushObjectToPool(GameObject objectTransform, float delayTime)
+    IEnumerator DelayPushObjectToPool(GameObject objectTransform, float delayTime)
     {
         while (delayTime > 0)
         {
             yield return null;
-            if(!objectTransform.activeInHierarchy)
+            if(!objectTransform.gameObject.activeInHierarchy)
             {
                 yield break;
             }
             delayTime -= Time.deltaTime;
         }
-        if (objectTransform.activeSelf)
+        if (objectTransform.gameObject.activeSelf)
         {
-            objectTransform.SetActive(true);
+            objectTransform.gameObject.SetActive(true);
             idleLinkedList.AddFirst(objectTransform);
             workingLinkedList.Remove(objectTransform);
         }

@@ -15,7 +15,7 @@ public class MapManager : Singleton<MapManager> {
 	/// <summary>
 	/// 地图塌陷相关
 	/// </summary>
-	private float tileFallTime = 0.2f;
+	private float tileFallTime = 0.4f;
 	private int mapIndex = 0;
 	private float offSetZ = 0f;
     private int mapTileDownDistance = 8;
@@ -112,7 +112,7 @@ public class MapManager : Singleton<MapManager> {
 			for (int i = 0; i < mapList [mapIndex].Length; i++) {
 				Rigidbody tempRigidbody = mapList [mapIndex] [i].AddComponent<Rigidbody> ();
 				tempRigidbody.angularVelocity = new Vector3 (Random.Range (0f, 2f), Random.Range (0f, 2f), Random.Range (0f, 2f));
-                PoolManager.PushObjectToPool(mapList[mapIndex][i],0.2f);
+                PoolManager.PushObjectToPool(mapList[mapIndex][i],1.0f);
                 //GameObject.Destroy (mapList [mapIndex] [i], 1f);
 			}
 			if (mapIndex == player.GetComponent<PlayerControl>().z) {

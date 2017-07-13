@@ -61,6 +61,7 @@ public class PoolManager : Singleton<PoolManager> {
         if (objectPool == null)
         {
             objectPool = CreateObjectPool(prefab, num,pos, rotate);
+            Debug.Log("找不到对象池后，重新生成的");
         }
         return objectPool;
     }
@@ -81,7 +82,7 @@ public class PoolManager : Singleton<PoolManager> {
         return null;
     }
 
-    public static void PushObjectToPool(GameObject handleTransform,float delayTime=0.0f)
+    public static void PushObjectToPool(GameObject handleTransform , float delayTime=0.0f)
     {
         ObjectPool objectPool = GetPoolByTransform(handleTransform);
         if (objectPool)
