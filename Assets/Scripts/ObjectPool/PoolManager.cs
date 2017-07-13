@@ -32,18 +32,18 @@ public class PoolManager : Singleton<PoolManager> {
         }
     }
 
-    private static ObjectPool CreateObjectPool(GameObject prefab, Vector3 pos = new Vector3(), Quaternion rotate = new Quaternion())
+    private static ObjectPool CreateObjectPool(GameObject prefab,int num,Vector3 pos = new Vector3(), Quaternion rotate = new Quaternion())
     {
         prefabList.Add(prefab);
         GameObject go = new GameObject();
         go.name = prefab.name + " Pool ";
         ObjectPool objectPool = go.AddComponent<ObjectPool>();
-        objectPool.InitObjectPool(prefab, transformDictionary,pos,rotate);
+        objectPool.InitObjectPool(prefab, transformDictionary, num,pos, rotate);
         objectPoolDictionary.Add(prefab.GetInstanceID(), objectPool);
         return objectPool;
     }
 
-    private static ObjectPool GetObjectPool(GameObject prefab, Vector3 pos = new Vector3(), Quaternion rotate = new Quaternion())
+    private static ObjectPool GetObjectPool(GameObject prefab, int num=100, Vector3 pos = new Vector3(), Quaternion rotate = new Quaternion())
     {
         ObjectPool objectPool = null;
         int count = prefabList.Count;
@@ -60,16 +60,16 @@ public class PoolManager : Singleton<PoolManager> {
         //如果找不到对象池，就生成一个对象池
         if (objectPool == null)
         {
-            objectPool = CreateObjectPool(prefab,pos,rotate);
+            objectPool = CreateObjectPool(prefab, num,pos, rotate);
         }
         return objectPool;
     }
 
     //初始化某个预制体对应的对象池
-    public static void InitPrefab(GameObject prefab, Vector3 pos = new Vector3(), Quaternion rotate = new Quaternion())
+    /*public static void InitPrefab(GameObject prefab, Vector3 pos = new Vector3(), Quaternion rotate = new Quaternion())
     {
         GetObjectPool(prefab, pos, rotate);
-    }
+    }*/
 
     private static ObjectPool GetPoolByTransform(GameObject handleTransform)
     {
@@ -81,12 +81,12 @@ public class PoolManager : Singleton<PoolManager> {
         return null;
     }
 
-    public static void PushObjectToPool(GameObject handleTransform)
+    public static void PushObjectToPool(GameObject handleTransform,float delayTime=0.0f)
     {
         ObjectPool objectPool = GetPoolByTransform(handleTransform);
         if (objectPool)
         {
-            objectPool.PushObjectToPool(handleTransform);
+            objectPool.PushObjectToPool(handleTransform,delayTime);
         }
         else
         {
@@ -94,14 +94,14 @@ public class PoolManager : Singleton<PoolManager> {
         }
     }
 
-    public static GameObject PullObjectFromPool(GameObject prefab)
+    public static GameObject PullObjectFromPool(GameObject prefab,int num=100)
     {
         if (prefab == null)
         {
             Debug.Log("prefab is null!");
             return null;
         }
-        ObjectPool objPool = GetObjectPool(prefab);
+        ObjectPool objPool = GetObjectPool(prefab,num);
         //StartThreadOnce();
         return objPool.PullObjectFromObjectPool();
     }

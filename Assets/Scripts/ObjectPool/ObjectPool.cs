@@ -29,8 +29,8 @@ public class ObjectPool : MonoBehaviour {
     /// <summary>
     /// 初始化对象池
     /// </summary>
-    public void InitObjectPool(GameObject prefab,Dictionary<GameObject, ObjectPool> poolDictionary,
-        Vector3 pos = new Vector3(),Quaternion rotate = new Quaternion(),int loadNum=30)
+    public void InitObjectPool(GameObject prefab,Dictionary<GameObject, ObjectPool> poolDictionary, int loadNum,
+        Vector3 pos = new Vector3(),Quaternion rotate = new Quaternion())
     {
         this.prefab = prefab;
         this.poolDictionary = poolDictionary;
@@ -39,6 +39,7 @@ public class ObjectPool : MonoBehaviour {
         for(int i = 0; i < loadNum; i++)
         {
             GameObject go = GameObject.Instantiate(prefab, pos, rotate);
+            go.name = i + "";
             go.SetActive(true);
             go.transform.SetParent(transform);
             idleLinkedList.AddFirst(go);
@@ -68,25 +69,25 @@ public class ObjectPool : MonoBehaviour {
         return myObject;
     }
 
-    public void PushObjectToPool(GameObject objectTransform,float delayTime = 0.0f)
+    public void PushObjectToPool(GameObject objectTransform,float delayTime)
     {
         StartCoroutine("DelayPushObjectToPool", delayTime);
     }
 
-    IEnumerable DelayPushObjectToPool(GameObject objectTransform, float delayTime = 0.0f)
+    IEnumerable DelayPushObjectToPool(GameObject objectTransform, float delayTime)
     {
         while (delayTime > 0)
         {
             yield return null;
-            if(!objectTransform.gameObject.activeInHierarchy)
+            if(!objectTransform.activeInHierarchy)
             {
                 yield break;
             }
             delayTime -= Time.deltaTime;
         }
-        if (objectTransform.gameObject.activeSelf)
+        if (objectTransform.activeSelf)
         {
-            objectTransform.gameObject.SetActive(true);
+            objectTransform.SetActive(true);
             idleLinkedList.AddFirst(objectTransform);
             workingLinkedList.Remove(objectTransform);
         }
