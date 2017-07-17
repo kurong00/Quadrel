@@ -17,7 +17,7 @@ public class MapManager : Singleton<MapManager> {
 	/// <summary>
 	/// 地图塌陷相关
 	/// </summary>
-	private float tileFallTime = 0.4f;
+	private float tileFallTime = 0.2f;
 	private int mapIndex = 0;
 	private float offSetZ = 0f;
     private int mapTileDownDistance = 8;
@@ -53,17 +53,11 @@ public class MapManager : Singleton<MapManager> {
 				Vector3 initRota = new Vector3 (-90, 45, 0);
 				if (j == 0 || j == 5) {
                     //墙壁的颜色
-                    initItem = PoolManager.PullObjectFromPool(mapWall,40);
-                    initItem.SetActive(true);
-                    initItem.transform.position = initPos;
-                    initItem.transform.rotation = Quaternion.Euler(initRota);
-					//initItem = GameObject.Instantiate (mapWall, initPos, Quaternion.Euler (initRota));
+                    initItem = PoolManager.PullObjectFromPool(mapWall,100,initPos,Quaternion.Euler(initRota)).gameObject;
+                   //initItem = GameObject.Instantiate (mapWall, initPos, Quaternion.Euler (initRota));
 					initItem.GetComponent<MeshRenderer> ().material.color = mapColor.colorOfWall;
 				} else {
-                    initItem = PoolManager.PullObjectFromPool(mapTile,200);
-                    initItem.SetActive(true);
-                    initItem.transform.position = initPos;
-                    initItem.transform.rotation = Quaternion.Euler(initRota);
+                    initItem = PoolManager.PullObjectFromPool(mapTile,500, initPos, Quaternion.Euler(initRota)).gameObject;
                     //initItem = GameObject.Instantiate (mapTile, initPos, Quaternion.Euler (initRota));
                     initItem.GetComponent<Transform> ().Find ("tile_plane").GetComponent<MeshRenderer> ()
 						.material.color = mapColor.colorOfTileOne;
@@ -76,10 +70,7 @@ public class MapManager : Singleton<MapManager> {
 				//第二种瓷砖的出生位置
 				Vector3 initPos = new Vector3 (j * bottomTileLength + bottomTileLength / 2, 0, offSetZ + i * bottomTileLength + bottomTileLength / 2);
 				Vector3 initRota = new Vector3 (-90, 45, 0);
-                initItem = PoolManager.PullObjectFromPool(mapTile,200);
-                initItem.SetActive(true);
-                initItem.transform.position = initPos;
-                initItem.transform.rotation = Quaternion.Euler(initRota);
+                initItem = PoolManager.PullObjectFromPool(mapTile,500,initPos, Quaternion.Euler(initRota)).gameObject;
                 //GameObject initItem = GameObject.Instantiate (mapTile, initPos, Quaternion.Euler (initRota)); 
                 initItem.GetComponent<Transform> ().Find ("tile_plane").GetComponent<MeshRenderer> ()
 					.material.color = mapColor.colorOfTileTwo;
@@ -116,7 +107,7 @@ public class MapManager : Singleton<MapManager> {
 			for (int i = 0; i < mapList [mapIndex].Length; i++) {
 				Rigidbody tempRigidbody = mapList [mapIndex] [i].AddComponent<Rigidbody> ();
 				tempRigidbody.angularVelocity = new Vector3 (Random.Range (0f, 2f), Random.Range (0f, 2f), Random.Range (0f, 2f));
-                PoolManager.PushObjectToPool(mapList[mapIndex][i], 1.0f);
+                PoolManager.PushObjectToPool(mapList[mapIndex][i].transform, 0.5f);
                 //GameObject.Destroy (mapList [mapIndex] [i], 1f);
 			}
 			if (mapIndex == player.GetComponent<PlayerControl>().z) {

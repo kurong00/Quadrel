@@ -5,7 +5,7 @@ using FrameWork;
 
 public class PoolManager : Singleton<PoolManager> {
     private static List<GameObject> prefabList = new List<GameObject>();
-    private static Dictionary<GameObject, ObjectPool> transformDictionary = new Dictionary<GameObject, ObjectPool>();
+    private static Dictionary<Transform, ObjectPool> transformDictionary = new Dictionary<Transform, ObjectPool>();
     public static Dictionary<int, ObjectPool> objectPoolDictionary = new Dictionary<int, ObjectPool>();
     private bool clearFlag = false;
     private static List<Transform> trashList = new List<Transform>();
@@ -66,13 +66,7 @@ public class PoolManager : Singleton<PoolManager> {
         return objectPool;
     }
 
-    //初始化某个预制体对应的对象池
-    /*public static void InitPrefab(GameObject prefab, Vector3 pos = new Vector3(), Quaternion rotate = new Quaternion())
-    {
-        GetObjectPool(prefab, pos, rotate);
-    }*/
-
-    private static ObjectPool GetPool(GameObject handleTransform)
+    private static ObjectPool GetPool(Transform handleTransform)
     {
         if (transformDictionary.ContainsKey(handleTransform))
         {
@@ -82,9 +76,9 @@ public class PoolManager : Singleton<PoolManager> {
         return null;
     }
 
-    public static void PushObjectToPool(GameObject handleTransform , float delayTime=0.0f)
+    public static void PushObjectToPool(Transform handleTransform , float delayTime=0.0f)
     {
-        ObjectPool objectPool = GetPool(handleTransform);
+        ObjectPool objectPool = GetPool(handleTransform.transform);
         if (objectPool)
         {
             objectPool.PushObjectToPool(handleTransform,delayTime);
@@ -95,7 +89,7 @@ public class PoolManager : Singleton<PoolManager> {
         }
     }
 
-    public static GameObject PullObjectFromPool(GameObject prefab,int num=100)
+    public static Transform PullObjectFromPool(GameObject prefab,int num=100, Vector3 pos = new Vector3(), Quaternion rotate = new Quaternion())
     {
         if (prefab == null)
         {
@@ -104,6 +98,6 @@ public class PoolManager : Singleton<PoolManager> {
         }
         ObjectPool objPool = GetObjectPool(prefab,num);
         //StartThreadOnce();
-        return objPool.PullObjectFromObjectPool();
+        return objPool.PullObjectFromObjectPool(pos,rotate);
     }
 }
