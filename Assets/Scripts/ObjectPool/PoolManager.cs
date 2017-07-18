@@ -76,7 +76,7 @@ public class PoolManager : Singleton<PoolManager> {
         return null;
     }
 
-    public static void PushObjectToPool(Transform handleTransform , float delayTime=0.0f)
+    public static void PushObjectToPool(Transform handleTransform , float delayTime = 0.0f)
     {
         ObjectPool objectPool = GetPool(handleTransform.transform);
         if (objectPool)
@@ -89,7 +89,7 @@ public class PoolManager : Singleton<PoolManager> {
         }
     }
 
-    public static Transform PullObjectFromPool(GameObject prefab,int num=100, Vector3 pos = new Vector3(), Quaternion rotate = new Quaternion())
+    public static Transform PullObjectFromPool(GameObject prefab,int num = 100, Vector3 pos = new Vector3(), Quaternion rotate = new Quaternion())
     {
         if (prefab == null)
         {

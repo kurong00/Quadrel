@@ -89,9 +89,12 @@ public class ObjectPool : MonoBehaviour {
             }
             delayTime -= Time.deltaTime;
         }
+        /*if(objectTransform.gameObject.GetComponent<Rigidbody2D>())
+        {
+            Destroy(objectTransform.gameObject.GetComponent<Rigidbody2D>());
+        }*/
         if (objectTransform.gameObject.activeSelf)
         {
-            Debug.Log(objectTransform.name);
             objectTransform.gameObject.SetActive(false);
             idleLinkedList.AddLast(objectTransform);
             workingLinkedList.Remove(objectTransform);
