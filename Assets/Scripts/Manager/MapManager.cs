@@ -106,15 +106,15 @@ public class MapManager : Singleton<MapManager> {
 			yield return new WaitForSeconds (tileFallTime);
             Rigidbody tempRigidbody = null;
             for (int i = 0; i < mapList [mapIndex].Length; i++) {
-				tempRigidbody = mapList [mapIndex] [i].AddComponent<Rigidbody> ();
-				tempRigidbody.angularVelocity = new Vector3 (Random.Range (0f, 2f), Random.Range (0f, 2f), Random.Range (0f, 2f));
-                PoolManager.PushObjectToPool(mapList[mapIndex][i].transform);
+				//tempRigidbody = mapList [mapIndex] [i].AddComponent<Rigidbody> ();
+				//tempRigidbody.angularVelocity = new Vector3 (Random.Range (0f, 2f), Random.Range (0f, 2f), Random.Range (0f, 2f));
+                PoolManager.PushObjectToPool(mapList[mapIndex][i].transform,0.5F);
 			}
-            yield return new WaitForSeconds(tileFallTime);
+            //yield return new WaitForSeconds(tileFallTime);
             for (int i = 0; i < mapList[mapIndex].Length; i++)
             {
-                Destroy(tempRigidbody);
-                PoolManager.PushObjectToPool(mapList[mapIndex][i].transform);
+                //Destroy(tempRigidbody);
+                //PoolManager.PushObjectToPool(mapList[mapIndex][i].transform);
             }
             if (mapIndex == player.GetComponent<PlayerControl>().z) {
 				StopTileDown ();
