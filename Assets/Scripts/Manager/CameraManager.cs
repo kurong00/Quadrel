@@ -12,10 +12,6 @@ public class CameraManager : Singleton<CameraManager> {
 
 	private Vector3 initPos;
 
-    void Awake()
-    {
-        Application.targetFrameRate = 60;
-    }
 
     void Start () {
 		initPos = gameObject.transform.position;

@@ -5,22 +5,23 @@ using FrameWork;
 
 public class MapManager : Singleton<MapManager> {
 
-	/// <summary>
-	/// 生成地图相关
-	/// </summary>
-	private GameObject mapWall;
-	private GameObject mapTile;
+    /// <summary>
+    /// 单例相关
+    /// </summary>
     private GameColor mapColor;
+    private Constant mapConstant;
+    /// <summary>
+    /// 生成地图相关
+    /// </summary>
+    private GameObject mapWall;
+	private GameObject mapTile;
     private GameObject initItem = null;
     private List<GameObject[]> mapList = new List<GameObject[]>();
-	private float bottomTileLength = Mathf.Sqrt (2) * 0.254f;
 	/// <summary>
 	/// 地图塌陷相关
 	/// </summary>
-	private float tileFallTime = 0.2f;
 	private int mapIndex = 0;
 	private float offSetZ = 0f;
-    private int mapTileDownDistance = 8;
 	/// <summary>
 	/// 主角相关
 	/// </summary>
@@ -30,13 +31,14 @@ public class MapManager : Singleton<MapManager> {
 		mapWall = Resources.Load ("wall") as GameObject;
 		mapTile = Resources.Load ("tile") as GameObject;
         mapColor = ColorManager.Instance().SelectColor(ColorManager.ScenesType.MONDAY);
+        mapConstant = Constant.Instance();
         CreateMap ();
 		player = GameObject.FindWithTag ("Player");
 	}
 
 	void Update () {
-		if (mapList.Count - mapTileDownDistance < player.GetComponent<PlayerControl> ().z) {
-			offSetZ = mapList [mapList.Count - 1] [0].GetComponent<Transform> ().position.z + bottomTileLength / 2;
+		if (mapList.Count - mapConstant.TILE_DOWN_DISTANCE < player.GetComponent<PlayerControl> ().z) {
+			offSetZ = mapList [mapList.Count - 1] [0].GetComponent<Transform> ().position.z + mapConstant.BOTTOM_LENGTH / 2;
 			CreateMap ();
 		}
 	}
@@ -49,12 +51,13 @@ public class MapManager : Singleton<MapManager> {
 			GameObject[] mapItem1 = new GameObject[6];
 			for (int j = 0; j < 6; j++) {
 				//第一种瓷砖的出生位置
-				Vector3 initPos = new Vector3 (j * bottomTileLength, 0, offSetZ + i * bottomTileLength);
+				Vector3 initPos = new Vector3 (j * mapConstant.BOTTOM_LENGTH, 
+                    0, offSetZ + i * mapConstant.BOTTOM_LENGTH);
 				Vector3 initRota = new Vector3 (-90, 45, 0);
 				if (j == 0 || j == 5) {
                     //墙壁的颜色
                     //initItem = PoolManager.PullObjectFromPool(mapWall, 50, initPos, Quaternion.Euler(initRota)).gameObject;
-                   initItem = GameObject.Instantiate (mapWall, initPos, Quaternion.Euler (initRota));
+                    initItem = GameObject.Instantiate (mapWall, initPos, Quaternion.Euler (initRota));
 					initItem.GetComponent<MeshRenderer> ().material.color = mapColor.colorOfWall;
 				} else {
                     //initItem = PoolManager.PullObjectFromPool(mapTile, 200, initPos, Quaternion.Euler(initRota)).gameObject;
@@ -68,7 +71,8 @@ public class MapManager : Singleton<MapManager> {
 			GameObject[] mapItem2 = new GameObject[5];
 			for (int j = 0; j < 5; j++) {
 				//第二种瓷砖的出生位置
-				Vector3 initPos = new Vector3 (j * bottomTileLength + bottomTileLength / 2, 0, offSetZ + i * bottomTileLength + bottomTileLength / 2);
+				Vector3 initPos = new Vector3 (j * mapConstant.BOTTOM_LENGTH + mapConstant.BOTTOM_LENGTH / 2,
+                    0, offSetZ + i * mapConstant.BOTTOM_LENGTH + mapConstant.BOTTOM_LENGTH / 2);
 				Vector3 initRota = new Vector3 (-90, 45, 0);
                 //initItem = PoolManager.PullObjectFromPool(mapTile, 200, initPos, Quaternion.Euler(initRota)).gameObject;
                 GameObject initItem = GameObject.Instantiate (mapTile, initPos, Quaternion.Euler (initRota)); 
@@ -98,7 +102,7 @@ public class MapManager : Singleton<MapManager> {
 
 	private IEnumerator TileDown(){
 		while (true) {
-			yield return new WaitForSeconds (tileFallTime);
+			yield return new WaitForSeconds (mapConstant.TILE_DOWN_TIME);
             for (int i = 0; i < mapList [mapIndex].Length; i++) {
                 Rigidbody tempRigidbody = null;
                 tempRigidbody = mapList [mapIndex] [i].AddComponent<Rigidbody> ();
