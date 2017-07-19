@@ -44,7 +44,7 @@ public class ProbabilityManager : Singleton<ProbabilityManager> {
     /// 计算奖励物品的概率
     /// </summary>
     /// <returns></returns>
-    private bool CalculateCoin()
+    public bool CalculateCoin()
     {
         int pr = Random.Range(1, 100);
         if (pr == pb_coin)
