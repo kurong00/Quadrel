@@ -10,6 +10,7 @@ public class MapManager : Singleton<MapManager> {
     /// </summary>
     private GameColor mapColor;
     private Constant mapConstant;
+    private ProbabilityManager mapProbability;
     /// <summary>
     /// 生成地图相关
     /// </summary>
@@ -32,6 +33,7 @@ public class MapManager : Singleton<MapManager> {
 		mapTile = Resources.Load ("tile") as GameObject;
         mapColor = ColorManager.Instance().SelectColor(ColorManager.ScenesType.MONDAY);
         mapConstant = Constant.Instance();
+        mapProbability = ProbabilityManager.Instance();
         CreateMap ();
 		player = GameObject.FindWithTag ("Player");
 	}
@@ -55,12 +57,9 @@ public class MapManager : Singleton<MapManager> {
                     0, offSetZ + i * mapConstant.BOTTOM_LENGTH);
 				Vector3 initRota = new Vector3 (-90, 45, 0);
 				if (j == 0 || j == 5) {
-                    //墙壁的颜色
-                    //initItem = PoolManager.PullObjectFromPool(mapWall, 50, initPos, Quaternion.Euler(initRota)).gameObject;
                     initItem = GameObject.Instantiate (mapWall, initPos, Quaternion.Euler (initRota));
 					initItem.GetComponent<MeshRenderer> ().material.color = mapColor.colorOfWall;
 				} else {
-                    //initItem = PoolManager.PullObjectFromPool(mapTile, 200, initPos, Quaternion.Euler(initRota)).gameObject;
                     initItem = GameObject.Instantiate (mapTile, initPos, Quaternion.Euler (initRota));
                     initItem.GetComponent<Transform> ().Find ("tile_plane").GetComponent<MeshRenderer> ()
 						.material.color = mapColor.colorOfTileOne;

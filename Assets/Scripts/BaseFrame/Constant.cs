@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using FrameWork;
 
-public class Constant :Singleton<Constant>{
-
+public class Constant :Singleton<Constant>
+{
     /// <summary>
     /// 地图相关的常量
     /// </summary>
