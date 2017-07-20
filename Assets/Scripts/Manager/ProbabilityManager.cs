@@ -8,10 +8,10 @@ public class ProbabilityManager : Singleton<ProbabilityManager> {
     /// <summary>
     /// 坑洞陷阱概率，地面陷阱概率，天空陷阱概率，金币概率
     /// </summary>
-    private int pb_hole = 0;
-    private int pb_spikes = 0;
-    private int pb_sky_spikes = 0;
-    private int pb_coin = 2;
+    private static int pb_hole = 0;
+    private static int pb_spikes = 0;
+    private static int pb_sky_spikes = 0;
+    private static int pb_coin = 2;
 
     /// <summary>
     /// 计算概率
@@ -23,16 +23,16 @@ public class ProbabilityManager : Singleton<ProbabilityManager> {
     /// <returns></returns>
     public int CalculatePb()
     {
-        int pr = Random.Range(1, 100);
-        if (pr <= pb_hole)
+        int pb = Random.Range(1, 1000);
+        if (pb <= pb_hole)
         {
             return 1;
         }
-        else if (31 < pr && pr < pb_spikes + 30)
+        else if (301 < pb && pb < pb_spikes + 300)
         {
             return 2;
         }
-        else if (61 < pr && pr < pb_sky_spikes + 60)
+        else if (601 < pb && pb < pb_sky_spikes + 600)
         {
             return 3;
         }
@@ -58,7 +58,7 @@ public class ProbabilityManager : Singleton<ProbabilityManager> {
     public void AddPb()
     {
         pb_hole += 2;
-        pb_spikes += 2;
-        pb_sky_spikes += 2;
+        pb_spikes += 1;
+        pb_sky_spikes += 1;
     }
 }

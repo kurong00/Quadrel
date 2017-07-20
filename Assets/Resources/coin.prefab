@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 404470}
+  - component: {fileID: 114670671073001254}
   m_Layer: 0
   m_Name: coin
   m_TagString: Untagged
@@ -26,7 +27,7 @@ GameObject:
   - component: {fileID: 3304086}
   - component: {fileID: 2369228}
   m_Layer: 0
-  m_Name: gem_light
+  m_Name: coin_light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +44,7 @@ GameObject:
   - component: {fileID: 3381972}
   - component: {fileID: 2317952}
   m_Layer: 0
-  m_Name: gem 3
+  m_Name: coin_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -179,3 +180,14 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 160214}
   m_IsPrefabParent: 1
+--- !u!114 &114670671073001254
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54aa90fa97d201048b61d0646e7ceb84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

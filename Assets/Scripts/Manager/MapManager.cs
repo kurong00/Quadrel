@@ -35,8 +35,8 @@ public class MapManager : Singleton<MapManager> {
 		mapWall = Resources.Load ("wall") as GameObject;
 		mapTile = Resources.Load ("tile") as GameObject;
         mapCoin = Resources.Load("coin") as GameObject;
-        mapSkySpikes = Resources.Load("skySpikes") as GameObject;
-        mapSpikes = Resources.Load("spikes") as GameObject;
+        mapSkySpikes = Resources.Load("smashing_spikes") as GameObject;
+        mapSpikes = Resources.Load("moving_spikes") as GameObject;
         mapColor = ColorManager.Instance().SelectColor(ColorManager.ScenesType.MONDAY);
         mapConstant = Constant.Instance();
         mapProbability = ProbabilityManager.Instance();
@@ -71,6 +71,7 @@ public class MapManager : Singleton<MapManager> {
 				} else
                 {
                     int pb = mapProbability.CalculatePb();
+                    Debug.Log(pb);
                     if (pb == 0)
                     {
                         initItem = GameObject.Instantiate(mapTile, initPos, Quaternion.Euler(initRota));
@@ -108,13 +109,38 @@ public class MapManager : Singleton<MapManager> {
 				Vector3 initPos = new Vector3 (j * mapConstant.BOTTOM_LENGTH + mapConstant.BOTTOM_LENGTH / 2,
                     0, offSetZ + i * mapConstant.BOTTOM_LENGTH + mapConstant.BOTTOM_LENGTH / 2);
 				Vector3 initRota = new Vector3 (-90, 45, 0);
-                //initItem = PoolManager.PullObjectFromPool(mapTile, 200, initPos, Quaternion.Euler(initRota)).gameObject;
-                GameObject initItem = GameObject.Instantiate (mapTile, initPos, Quaternion.Euler (initRota)); 
-                initItem.GetComponent<Transform> ().Find ("tile_plane").GetComponent<MeshRenderer> ()
-					.material.color = mapColor.colorOfTileTwo;
-				mapItem2 [j] = initItem;
+                int pb = mapProbability.CalculatePb();
+                if (pb == 0)
+                {
+                    initItem = GameObject.Instantiate(mapTile, initPos, Quaternion.Euler(initRota));
+                    initItem.GetComponent<Transform>().Find("tile_plane").GetComponent<MeshRenderer>()
+                        .material.color = mapColor.colorOfTileTwo;
+                    bool pbCoin = mapProbability.CalculateCoin();
+                    if (pbCoin)
+                    {
+                        GameObject coin = GameObject.Instantiate(mapCoin, initItem.transform.position + new Vector3(0, 0.06f, 0),
+                            Quaternion.identity) as GameObject;
+                        coin.GetComponent<Transform>().SetParent(initItem.GetComponent<Transform>());
+                    }
+                }
+                if (pb == 1)
+                {
+                    initItem = new GameObject();
+                    initItem.GetComponent<Transform>().position = initPos;
+                    initItem.GetComponent<Transform>().rotation = Quaternion.Euler(initRota);
+                }
+                if (pb == 2)
+                {
+                    initItem = GameObject.Instantiate(mapSpikes, initPos, Quaternion.Euler(initRota));
+                }
+                if (pb == 3)
+                {
+                    initItem = GameObject.Instantiate(mapSkySpikes, initPos, Quaternion.Euler(initRota));
+                }
+                mapItem2 [j] = initItem;
 			}
 			mapList.Add (mapItem2);
+            mapProbability.AddPb();
 		}
 	}
 
