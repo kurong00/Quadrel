@@ -71,7 +71,6 @@ public class MapManager : Singleton<MapManager> {
 				} else
                 {
                     int pb = mapProbability.CalculatePb();
-                    Debug.Log(pb);
                     if (pb == 0)
                     {
                         initItem = GameObject.Instantiate(mapTile, initPos, Quaternion.Euler(initRota));
@@ -80,9 +79,7 @@ public class MapManager : Singleton<MapManager> {
                         bool pbCoin = mapProbability.CalculateCoin();
                         if (pbCoin)
                         {
-                            GameObject coin = GameObject.Instantiate(mapCoin, initItem.transform.position + new Vector3(0, 0.06f, 0), 
-                                Quaternion.identity) as GameObject;
-                            coin.GetComponent<Transform>().SetParent(initItem.GetComponent<Transform>());
+                            GameObject coin = PoolManager.PullObjectFromPool(mapCoin, mapConstant.COUNT_COIN_OBJECT_POOL, initPos, Quaternion.identity).gameObject;
                         }
                     }
                     if (pb == 1)
@@ -101,7 +98,8 @@ public class MapManager : Singleton<MapManager> {
                     }
                 }
 				mapItem1 [j] = initItem;
-			}
+                initItem.GetComponent<Transform>().SetParent(this.GetComponent<Transform>());
+            }
 			mapList.Add (mapItem1);
 			GameObject[] mapItem2 = new GameObject[5];
 			for (int j = 0; j < 5; j++) {
@@ -118,9 +116,7 @@ public class MapManager : Singleton<MapManager> {
                     bool pbCoin = mapProbability.CalculateCoin();
                     if (pbCoin)
                     {
-                        GameObject coin = GameObject.Instantiate(mapCoin, initItem.transform.position + new Vector3(0, 0.06f, 0),
-                            Quaternion.identity) as GameObject;
-                        coin.GetComponent<Transform>().SetParent(initItem.GetComponent<Transform>());
+                        GameObject coin = PoolManager.PullObjectFromPool(mapCoin, mapConstant.COUNT_COIN_OBJECT_POOL, initPos, Quaternion.identity).gameObject;
                     }
                 }
                 if (pb == 1)
@@ -138,7 +134,8 @@ public class MapManager : Singleton<MapManager> {
                     initItem = GameObject.Instantiate(mapSkySpikes, initPos, Quaternion.Euler(initRota));
                 }
                 mapItem2 [j] = initItem;
-			}
+                initItem.GetComponent<Transform>().SetParent(this.GetComponent<Transform>());
+            }
 			mapList.Add (mapItem2);
             mapProbability.AddPb();
 		}
@@ -168,7 +165,6 @@ public class MapManager : Singleton<MapManager> {
                 tempRigidbody = mapList [mapIndex] [i].AddComponent<Rigidbody> ();
                 tempRigidbody.angularVelocity = new Vector3 (Random.Range (0f, 2f), Random.Range (0f, 2f), Random.Range (0f, 2f));
                 Destroy(mapList[mapIndex][i], 0.5f);
-                //PoolManager.PushObjectToPool(mapList[mapIndex][i].transform,0.5F);
 			}
             if (mapIndex == player.GetComponent<PlayerControl>().z) {
 				StopTileDown ();

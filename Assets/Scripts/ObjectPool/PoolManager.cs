@@ -97,7 +97,6 @@ public class PoolManager : Singleton<PoolManager> {
             return null;
         }
         ObjectPool objPool = GetObjectPool(prefab,num);
-        //StartThreadOnce();
         return objPool.PullObjectFromObjectPool(pos,rotate);
     }
 }

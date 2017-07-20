@@ -68,5 +68,13 @@ public class PlayerControl : MonoBehaviour {
 			tilePlane.material.color = playerPosColor.colorOfMeshRenderTwo;
 		gameObject.transform.position = playerPos.position + new Vector3 (0, 0.254f / 2, 0);
 	}
-		
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Award")
+        {
+            PoolManager.PushObjectToPool(other.gameObject.transform);
+        }
+    }
+
 }

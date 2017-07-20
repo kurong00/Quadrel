@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 2386728}
   m_Layer: 0
   m_Name: smashing_spikes
-  m_TagString: Untagged
+  m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
