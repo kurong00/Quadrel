@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 3361172}
   - component: {fileID: 2365204}
   - component: {fileID: 114146058698636088}
+  - component: {fileID: 54177686960984268}
+  - component: {fileID: 65932498917801256}
   m_Layer: 0
   m_Name: cube_mushroom
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,6 +83,33 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 133654}
   m_IsPrefabParent: 1
+--- !u!54 &54177686960984268
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 133654}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &65932498917801256
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 133654}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.14025486, y: 0.18511668, z: 0.14}
+  m_Center: {x: -0.008574545, y: -0.006568283, z: -0.02}
 --- !u!114 &114146058698636088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -92,3 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca9c13b3a3363874499d945fa085a4e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  x: 3
+  z: 2
