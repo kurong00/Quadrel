@@ -15,7 +15,6 @@ public class PlayerControl : MonoBehaviour {
 		mapManager =  MapManager.Instance();
 	}
 	
-
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Space)){
 			CameraManager.Instance ().startFollow = true;
@@ -61,13 +60,28 @@ public class PlayerControl : MonoBehaviour {
 
 	void SetPlayerPosition(){
 		Transform playerPos =  mapManager.GetMapList()[z] [x].GetComponent<Transform> ();
-		MeshRenderer tilePlane = playerPos.Find ("tile_plane").GetComponent<MeshRenderer> ();
-		if (z % 2 == 0)
-			tilePlane.material.color = playerPosColor.colorOfMeshRenderOne;
-		else
-			tilePlane.material.color = playerPosColor.colorOfMeshRenderTwo;
-		gameObject.transform.position = playerPos.position + new Vector3 (0, 0.254f / 2, 0);
-	}
+        MeshRenderer meshRenderer = null;
+        if (playerPos.tag == "Tile")
+        {
+            meshRenderer = playerPos.Find("tile_plane").GetComponent<MeshRenderer> ();
+        }
+        if (playerPos.tag == "SkySpikes"|| playerPos.tag == "Spikes")
+        {
+            meshRenderer = playerPos.Find("spikes_b").GetComponent<MeshRenderer>();
+        }
+        if (meshRenderer != null)
+        {
+            if (z % 2 == 0)
+                meshRenderer.material.color = playerPosColor.colorOfMeshRenderOne;
+            else
+                meshRenderer.material.color = playerPosColor.colorOfMeshRenderTwo;
+        }
+        else
+        {
+            gameObject.GetComponent<Rigidbody>().useGravity = true;
+        }
+        gameObject.transform.position = playerPos.position + new Vector3(0, 0.254f / 2, 0);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
