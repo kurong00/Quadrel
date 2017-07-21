@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2372238}
   m_Layer: 0
   m_Name: tile_plane
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +29,7 @@ GameObject:
   - component: {fileID: 2352476}
   m_Layer: 0
   m_Name: tile
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

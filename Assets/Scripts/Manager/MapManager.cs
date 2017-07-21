@@ -80,6 +80,7 @@ public class MapManager : Singleton<MapManager> {
                         if (pbCoin)
                         {
                             GameObject coin = PoolManager.PullObjectFromPool(mapCoin, mapConstant.COUNT_COIN_OBJECT_POOL, initPos, Quaternion.identity).gameObject;
+                            coin.transform.parent = initItem.transform;
                         }
                     }
                     if (pb == 1)
@@ -117,6 +118,7 @@ public class MapManager : Singleton<MapManager> {
                     if (pbCoin)
                     {
                         GameObject coin = PoolManager.PullObjectFromPool(mapCoin, mapConstant.COUNT_COIN_OBJECT_POOL, initPos, Quaternion.identity).gameObject;
+                        coin.transform.parent = initItem.transform;
                     }
                 }
                 if (pb == 1)
@@ -160,13 +162,23 @@ public class MapManager : Singleton<MapManager> {
 	private IEnumerator TileDown(){
 		while (true) {
 			yield return new WaitForSeconds (mapConstant.TILE_DOWN_TIME);
-            for (int i = 0; i < mapList [mapIndex].Length; i++) {
+            for (int i = 0; i < mapList [mapIndex].Length; i++)
+            {
                 Rigidbody tempRigidbody = null;
+                if(mapList[mapIndex][i].tag == "SkySpikes"|| mapList[mapIndex][i].tag == "Spikes")
+                {
+                    mapList[mapIndex][i].GetComponent<Spikes>().StopAllCoroutines();
+                }
+                if (mapList[mapIndex][i].transform.childCount > 1)
+                {
+                    PoolManager.PushObjectToPool(mapList[mapIndex][i].transform.GetChild(1),0.5f);
+                }
                 tempRigidbody = mapList [mapIndex] [i].AddComponent<Rigidbody> ();
                 tempRigidbody.angularVelocity = new Vector3 (Random.Range (0f, 2f), Random.Range (0f, 2f), Random.Range (0f, 2f));
                 Destroy(mapList[mapIndex][i], 0.5f);
 			}
-            if (mapIndex == player.GetComponent<PlayerControl>().z) {
+            if (mapIndex == player.GetComponent<PlayerControl>().z)
+            {
 				StopTileDown ();
 				CameraManager.Instance ().startFollow = false;
 				player.AddComponent<Rigidbody2D> ();

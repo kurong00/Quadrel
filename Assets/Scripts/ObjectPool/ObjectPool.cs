@@ -83,16 +83,16 @@ public class ObjectPool : MonoBehaviour {
         while (delayTime > 0)
         {
             yield return null;
-            if(!objectTransform.gameObject.activeInHierarchy)
+            if (objectTransform.gameObject != null)
             {
-                yield break;
+                if(!objectTransform.gameObject.activeInHierarchy)
+                {
+                    yield break;
+                }
+                delayTime -= Time.deltaTime;
             }
-            delayTime -= Time.deltaTime;
+            
         }
-        /*if(objectTransform.gameObject.GetComponent<Rigidbody2D>())
-        {
-            Destroy(objectTransform.gameObject.GetComponent<Rigidbody2D>());
-        }*/
         if (objectTransform.gameObject.activeSelf)
         {
             objectTransform.gameObject.SetActive(false);

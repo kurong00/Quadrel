@@ -87,7 +87,7 @@ public class PlayerControl : MonoBehaviour {
     {
         if(other.tag == "Award")
         {
-            PoolManager.PushObjectToPool(other.gameObject.transform);
+            PoolManager.PushObjectToPool(other.gameObject.GetComponentInParent<Transform>());
         }
     }
 

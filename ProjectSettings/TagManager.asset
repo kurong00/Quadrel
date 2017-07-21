@@ -9,6 +9,7 @@ TagManager:
   - SpikesB
   - Spikes
   - SkySpikes
+  - Tile
   layers:
   - Default
   - TransparentFX
