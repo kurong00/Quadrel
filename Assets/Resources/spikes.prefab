@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 401652}
   - component: {fileID: 3334800}
   - component: {fileID: 2387976}
+  - component: {fileID: 65316759185728534}
   m_Layer: 0
   m_Name: spikes_b
   m_TagString: Spikes
@@ -85,7 +86,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 129230}
   m_LocalRotation: {x: -4.32978e-17, y: 0.7071067, z: 0.7071068, w: -4.3297806e-17}
-  m_LocalPosition: {x: 3.2771373, y: -0.5629053, z: 1.2539859}
+  m_LocalPosition: {x: -12.373962, y: -4.1822767, z: 7.8229456}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 435086}
@@ -221,6 +222,18 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 129230}
   m_IsPrefabParent: 1
+--- !u!65 &65316759185728534
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175874}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.19841236, y: 0.19841231, z: 0.14241397}
+  m_Center: {x: 0.0006175265, y: -0.00005744511, z: -0.08168221}
 --- !u!114 &114680501700923256
 MonoBehaviour:
   m_ObjectHideFlags: 1

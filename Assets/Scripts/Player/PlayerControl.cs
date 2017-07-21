@@ -5,15 +5,22 @@ using FrameWork;
 
 public class PlayerControl : MonoBehaviour {
 
-	private bool isDead = false;
+    /// <summary>
+    /// 角色控制相关
+    /// </summary>
 	[HideInInspector]
 	public int x = 3,z = 2;
-	private GameColor playerPosColor;
-	private MapManager mapManager;
-	void Start () {
+    /// <summary>
+    /// 单例相关
+    /// </summary>
+    private GameColor playerPosColor;
+    private MapManager mapManager;
+    private GameOverControl gameOverControl;
+    void Start () {
 		playerPosColor = ColorManager.Instance ().SelectColor (ColorManager.ScenesType.MONDAY);
 		mapManager =  MapManager.Instance();
-	}
+        gameOverControl = GameOverControl.Instance();
+    }
 	
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Space)){
@@ -35,7 +42,7 @@ public class PlayerControl : MonoBehaviour {
 	}
 
 	void GoLeft(){
-		if (!isDead) {
+		if (!gameOverControl.isDead) {
 			if (x != 0) {
 				z++;
 			}
@@ -47,7 +54,7 @@ public class PlayerControl : MonoBehaviour {
 	}
 
 	void GoRight(){
-		if (!isDead) {
+		if (!gameOverControl.isDead) {
 			if (x != 4||z % 2 != 1) {
 				z++;
 			}
@@ -78,6 +85,7 @@ public class PlayerControl : MonoBehaviour {
         }
         else
         {
+            gameOverControl.GameOver();
             gameObject.GetComponent<Rigidbody>().useGravity = true;
         }
         gameObject.transform.position = playerPos.position + new Vector3(0, 0.254f / 2, 0);
@@ -88,6 +96,10 @@ public class PlayerControl : MonoBehaviour {
         if(other.tag == "Award")
         {
             PoolManager.PushObjectToPool(other.gameObject.GetComponentInParent<Transform>());
+        }
+        if(other.tag == "SkySpikes"|| other.tag == "Spikes")
+        {
+            gameOverControl.GameOver();
         }
     }
 

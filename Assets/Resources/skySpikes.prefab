@@ -10,6 +10,7 @@ GameObject:
   - component: {fileID: 482276}
   - component: {fileID: 3330672}
   - component: {fileID: 2395404}
+  - component: {fileID: 65745629464982968}
   m_Layer: 0
   m_Name: spikes_b
   m_TagString: SkySpikes
@@ -85,7 +86,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 161704}
   m_LocalRotation: {x: -4.32978e-17, y: 0.7071067, z: 0.7071068, w: -4.3297806e-17}
-  m_LocalPosition: {x: -0.93577075, y: -0.9723313, z: 11.469068}
+  m_LocalPosition: {x: -4.3953104, y: -2.7299795, z: 7.2826157}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 415636}
@@ -221,6 +222,18 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 161704}
   m_IsPrefabParent: 1
+--- !u!65 &65745629464982968
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 102042}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.17094612, y: 0.1784759, z: 0.24483138}
+  m_Center: {x: -0.00037145615, y: -0.0053923656, z: -0.14705993}
 --- !u!114 &114374007124472834
 MonoBehaviour:
   m_ObjectHideFlags: 1
