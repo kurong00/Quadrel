@@ -15,5 +15,10 @@ public class Constant :Singleton<Constant>
     /// 概率相关常量
     /// </summary>
     public int COUNT_COIN_OBJECT_POOL = 20;
+    /// <summary>
+    /// 障碍物相关常量
+    /// </summary>
+    public int SPIKES_FALL_TIME = 25;
+    public float SPIKES_WAIT_TIME = 2.0f;
 
 }

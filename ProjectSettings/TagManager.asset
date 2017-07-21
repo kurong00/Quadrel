@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Award
   - Attacker
+  - SpikesB
+  - Spikes
+  - SkySpikes
   layers:
   - Default
   - TransparentFX

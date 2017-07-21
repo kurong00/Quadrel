@@ -35,8 +35,8 @@ public class MapManager : Singleton<MapManager> {
 		mapWall = Resources.Load ("wall") as GameObject;
 		mapTile = Resources.Load ("tile") as GameObject;
         mapCoin = Resources.Load("coin") as GameObject;
-        mapSkySpikes = Resources.Load("smashing_spikes") as GameObject;
-        mapSpikes = Resources.Load("moving_spikes") as GameObject;
+        mapSkySpikes = Resources.Load("skySpikes") as GameObject;
+        mapSpikes = Resources.Load("spikes") as GameObject;
         mapColor = ColorManager.Instance().SelectColor(ColorManager.ScenesType.MONDAY);
         mapConstant = Constant.Instance();
         mapProbability = ProbabilityManager.Instance();
