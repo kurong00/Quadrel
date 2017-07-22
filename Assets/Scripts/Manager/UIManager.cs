@@ -17,7 +17,6 @@ public class UIManager : MonoBehaviour {
     /// <summary>
     /// UI中的动效相关
     /// </summary>
-    Transition transitionButtonNormal;
     void Start () {
         UIConstant = Constant.Instance();
         GRoot.inst.SetContentScaleFactor(UIConstant.HEIGHT, UIConstant.WIDE);
@@ -26,15 +25,9 @@ public class UIManager : MonoBehaviour {
         GRoot.inst.AddChild(componentMain);
         GComponent ComponentLine = componentMain.GetChild("n2").asCom;
         controllerLine = ComponentLine.GetController("line_c");
-        GComponent componentButtonNormal = componentMain.GetChild("n1").asCom;
-        transitionButtonNormal = componentButtonNormal.GetTransition("button_t");
     }
 	
 	void Update () {
-		if(Input.GetMouseButtonDown(0))
-        {
-            controllerLine.selectedIndex = 1;
-            transitionButtonNormal.Play();
-        }
+        controllerLine.selectedIndex = 1;
 	}
 }
