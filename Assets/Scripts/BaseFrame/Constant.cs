@@ -20,5 +20,9 @@ public class Constant :Singleton<Constant>
     /// </summary>
     public int SPIKES_FALL_TIME = 25;
     public float SPIKES_WAIT_TIME = 2.0f;
-
+    /// <summary>
+    /// UI常量相关
+    /// </summary>
+    public int HEIGHT = 1920;
+    public int WIDE = 1080;
 }
