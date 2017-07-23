@@ -11,16 +11,16 @@ public class UIManager : MonoBehaviour {
     /// </summary>
     private Constant UIConstant;
     /// <summary>
-    /// UI中的控制器相关
+    /// UI中的组件相关
     /// </summary>
-    //Controller controllerLine;
+    GComponent componentMain;
+    GComponent componentNormal;
+
     /// <summary>
     /// UI中的动效相关
     /// </summary>
-    Transition transitionLine;
-    Transition transitionButtonNormal;
-    Transition transitionButtonChanllenge;
-    Transition transitionButtonExit;
+    //Transition transitionLine;
+
     /// <summary>
     /// UI中的按钮相关
     /// </summary>
@@ -31,25 +31,31 @@ public class UIManager : MonoBehaviour {
         UIConstant = Constant.Instance();
         GRoot.inst.SetContentScaleFactor(UIConstant.HEIGHT, UIConstant.WIDE);
         UIPackage.AddPackage("UI/主界面");
-        GComponent componentMain = UIPackage.CreateObject("主界面", "主界面").asCom;
+        componentMain = UIPackage.CreateObject("界面UI", "主界面").asCom;
+        componentNormal = UIPackage.CreateObject("界面UI", "普通模式").asCom;
         GRoot.inst.AddChild(componentMain);
+
         GComponent ComponentLine = componentMain.GetChild("line").asCom;
-        transitionLine = ComponentLine.GetTransition("line_t");
         buttonNormal= componentMain.GetChild("button_normal").asButton;
         buttonChanllenge = componentMain.GetChild("button_chanllenge").asButton;
         buttonExit = componentMain.GetChild("button_exit").asButton;
-        transitionButtonNormal = componentMain.GetTransition("button_t");
-        transitionButtonChanllenge = componentMain.GetTransition("button_t");
-        transitionButtonExit = componentMain.GetTransition("button_t");
     }
 	
 	void Update ()
     {
         buttonNormal.onClick.Add(LoadNormalScene);
+        buttonChanllenge.onClick.Add(LoadChanllengeScene);
         buttonExit.onClick.Add(GameExit);
     }
 
     void LoadNormalScene()
+    {
+        SceneManager.LoadScene("Main");
+        GRoot.inst.AddChild(componentNormal);
+        componentMain.alpha = 0;
+    }
+
+    void LoadChanllengeScene()
     {
         SceneManager.LoadScene("Main");
     }
