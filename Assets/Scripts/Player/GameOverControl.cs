@@ -10,5 +10,6 @@ public class GameOverControl : Singleton<GameOverControl> {
     {
         isDead = true;
         Time.timeScale = 0;
+        DataManager.instance.SaveScore();
     }
 }

@@ -25,4 +25,12 @@ public class Constant :Singleton<Constant>
     /// </summary>
     public int HEIGHT = 1920;
     public int WIDE = 1080;
+    /// <summary>
+    /// 游戏得分相关
+    /// </summary>
+    public int PER_STEP_SCORE = 1;
+    public int PER_COIN_SCORE = 10;
+    public string KEY_LAST_GAME_SCORE = "LAST_GAME_SCORE";
+    public string KEY_BEST_GAME_SCORE = "BEST_GAME_SCORE";
+    public string KEY_COIN_SCORE = "COIN_SCORE";
 }

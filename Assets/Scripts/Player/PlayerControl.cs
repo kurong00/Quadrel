@@ -16,9 +16,11 @@ public class PlayerControl : MonoBehaviour {
     private GameColor playerPosColor;
     private MapManager mapManager;
     private GameOverControl gameOverControl;
+    private DataManager dataManager;
     void Start () {
 		playerPosColor = ColorManager.Instance ().SelectColor (ColorManager.ScenesType.MONDAY);
 		mapManager =  MapManager.Instance();
+        dataManager = DataManager.Instance();
         gameOverControl = GameOverControl.Instance();
     }
 	
@@ -89,6 +91,7 @@ public class PlayerControl : MonoBehaviour {
             gameObject.GetComponent<Rigidbody>().useGravity = true;
         }
         gameObject.transform.position = playerPos.position + new Vector3(0, 0.254f / 2, 0);
+        dataManager.AddGameScore();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -96,6 +99,7 @@ public class PlayerControl : MonoBehaviour {
         if(other.tag == "Award")
         {
             PoolManager.PushObjectToPool(other.gameObject.GetComponentInParent<Transform>());
+            dataManager.AddCoinScore();
         }
         if(other.tag == "SkySpikes"|| other.tag == "Spikes")
         {

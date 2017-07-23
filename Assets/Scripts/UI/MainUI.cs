@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using FrameWork;
 using UnityEngine;
 using FairyGUI;
 using UnityEngine.SceneManagement;
 
-public class UIManager : MonoBehaviour {
+public class MainUI : MonoBehaviour {
 
     /// <summary>
     /// 单例相关
@@ -14,29 +13,20 @@ public class UIManager : MonoBehaviour {
     /// UI中的组件相关
     /// </summary>
     GComponent componentMain;
-    GComponent componentNormal;
-
     /// <summary>
-    /// UI中的动效相关
-    /// </summary>
-    //Transition transitionLine;
-
-    /// <summary>
-    /// UI中的按钮相关
+    /// 主UI界面中的按钮相关
     /// </summary>
     GButton buttonNormal;
     GButton buttonChanllenge;
     GButton buttonExit;
+    
     void Start () {
         UIConstant = Constant.Instance();
         GRoot.inst.SetContentScaleFactor(UIConstant.HEIGHT, UIConstant.WIDE);
         UIPackage.AddPackage("UI/主界面");
         componentMain = UIPackage.CreateObject("界面UI", "主界面").asCom;
-        componentNormal = UIPackage.CreateObject("界面UI", "普通模式").asCom;
         GRoot.inst.AddChild(componentMain);
-
-        GComponent ComponentLine = componentMain.GetChild("line").asCom;
-        buttonNormal= componentMain.GetChild("button_normal").asButton;
+        buttonNormal = componentMain.GetChild("button_normal").asButton;
         buttonChanllenge = componentMain.GetChild("button_chanllenge").asButton;
         buttonExit = componentMain.GetChild("button_exit").asButton;
     }
@@ -50,19 +40,25 @@ public class UIManager : MonoBehaviour {
 
     void LoadNormalScene()
     {
-        SceneManager.LoadScene("Main");
-        GRoot.inst.AddChild(componentNormal);
-        componentMain.alpha = 0;
+        MainGameInitLoad();
     }
 
     void LoadChanllengeScene()
     {
-        SceneManager.LoadScene("Main");
+        MainGameInitLoad();
     }
 
     void GameExit()
     {
         Application.Quit();
     }
+
+    void MainGameInitLoad()
+    {
+        SceneManager.LoadScene("Main");
+        componentMain.visible = false;
+    }
+
     
+
 }
