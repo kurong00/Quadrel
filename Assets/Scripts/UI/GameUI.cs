@@ -10,6 +10,7 @@ public class GameUI : MonoBehaviour {
     /// </summary>
     private Constant UIConstant;
     private DataManager dataManager;
+    private GameControl gameControl;
     /// <summary>
     /// UI中的组件相关
     /// </summary>
@@ -20,6 +21,8 @@ public class GameUI : MonoBehaviour {
     GButton buttonSound;
     GButton buttonPause;
     GButton buttonPlay;
+    GButton buttonLeft;
+    GButton buttonRight;
     /// <summary>
     /// 游戏界面分数Text相关
     /// </summary>
@@ -28,6 +31,7 @@ public class GameUI : MonoBehaviour {
     void Start () {
         UIConstant = Constant.Instance();
         dataManager = DataManager.Instance();
+        gameControl = GameControl.Instance();
         GRoot.inst.SetContentScaleFactor(UIConstant.HEIGHT, UIConstant.WIDE);
         UIPackage.AddPackage("UI/主界面");
         componentNormal = UIPackage.CreateObject("界面UI", "普通模式").asCom;
@@ -35,6 +39,8 @@ public class GameUI : MonoBehaviour {
         buttonSound = componentNormal.GetChild("button_sound").asButton;
         buttonPause = componentNormal.GetChild("button_pause").asButton;
         buttonPlay = componentNormal.GetChild("button_play").asButton;
+        buttonLeft = componentNormal.GetChild("button_left").asButton;
+        buttonRight = componentNormal.GetChild("button_right").asButton;
         textScore = componentNormal.GetChild("text_score").asTextField;
         textCoin = componentNormal.GetChild("text_coin").asTextField;
     }
@@ -44,6 +50,8 @@ public class GameUI : MonoBehaviour {
         buttonPlay.onClick.Add(ButtonPlayClick);
         buttonPause.onClick.Add(ButtonPauseClick);
         buttonSound.onClick.Add(ButtonSoundClick);
+        buttonLeft.onClick.Add(ButtonLeftClick);
+        buttonRight.onClick.Add(ButtonRightClick);
         RefreshScore();
     }
 
@@ -70,12 +78,26 @@ public class GameUI : MonoBehaviour {
 
     void ButtonPauseClick()
     {
+        gameControl.isPlaying = false;
         buttonPause.visible = false;
         buttonPlay.visible = true;
     }
     void ButtonPlayClick()
     {
+        gameControl.isPlaying = true;
         buttonPause.visible = true;
         buttonPlay.visible = false;
+    }
+
+    void ButtonLeftClick()
+    {
+        PlayerControl.Instance().GoLeft();
+        buttonLeft.alpha = 0;
+    }
+
+    void ButtonRightClick()
+    {
+        PlayerControl.Instance().GoRight();
+        buttonRight.alpha = 0;
     }
 }

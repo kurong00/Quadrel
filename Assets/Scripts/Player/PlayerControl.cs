@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FrameWork;
 
-public class PlayerControl : MonoBehaviour {
+public class PlayerControl : Singleton<PlayerControl> {
 
     /// <summary>
     /// 角色控制相关
@@ -15,26 +15,45 @@ public class PlayerControl : MonoBehaviour {
     /// </summary>
     private GameColor playerPosColor;
     private MapManager mapManager;
-    private GameOverControl gameOverControl;
+    private GameControl gameControl;
     private DataManager dataManager;
-    void Start () {
+    void Awake () {
 		playerPosColor = ColorManager.Instance ().SelectColor (ColorManager.ScenesType.MONDAY);
 		mapManager =  MapManager.Instance();
         dataManager = DataManager.Instance();
-        gameOverControl = GameOverControl.Instance();
-    }
-	
-	void Update () {
-		if(Input.GetKeyDown(KeyCode.Space)){
-			CameraManager.Instance ().startFollow = true;
-			SetPlayerPosition ();
-			mapManager.StartTileDown ();
-		}
-		PlayerControll ();
-
+        gameControl = GameControl.Instance();
     }
 
-	void PlayerControll(){
+    private void Start()
+    {
+        //SetPlayerPosition();
+    }
+
+    /*void Update () {
+        if(!gameControl.isDead)
+        {
+            CameraManager.Instance().startFollow = true;
+            if (gameControl.isPlaying)
+            {
+                mapManager.StartTileDown();
+                PlayerControll();
+            }
+        }
+    }*/
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            CameraManager.Instance().startFollow = true;
+            SetPlayerPosition();
+            mapManager.StartTileDown();
+        }
+        PlayerControll();
+    }
+
+    void PlayerControll()
+    {
 		if(Input.GetKeyDown(KeyCode.A)){
 			GoLeft ();
 		}
@@ -43,8 +62,8 @@ public class PlayerControl : MonoBehaviour {
 		}
 	}
 
-	void GoLeft(){
-		if (!gameOverControl.isDead) {
+	public void GoLeft(){
+		if (!gameControl.isDead) {
 			if (x != 0) {
 				z++;
 			}
@@ -55,8 +74,8 @@ public class PlayerControl : MonoBehaviour {
 		SetPlayerPosition ();
 	}
 
-	void GoRight(){
-		if (!gameOverControl.isDead) {
+	public void GoRight(){
+		if (!gameControl.isDead) {
 			if (x != 4||z % 2 != 1) {
 				z++;
 			}
@@ -68,7 +87,7 @@ public class PlayerControl : MonoBehaviour {
 	}
 
 	void SetPlayerPosition(){
-		Transform playerPos =  mapManager.GetMapList()[z] [x].GetComponent<Transform> ();
+		Transform playerPos =  mapManager.GetMapList()[z] [x].GetComponent<Transform>();
         MeshRenderer meshRenderer = null;
         if (playerPos.tag == "Tile")
         {
@@ -87,7 +106,7 @@ public class PlayerControl : MonoBehaviour {
         }
         else
         {
-            gameOverControl.GameOver();
+            gameControl.GameOver();
             gameObject.GetComponent<Rigidbody>().useGravity = true;
         }
         gameObject.transform.position = playerPos.position + new Vector3(0, 0.254f / 2, 0);
@@ -103,7 +122,7 @@ public class PlayerControl : MonoBehaviour {
         }
         if(other.tag == "SkySpikes"|| other.tag == "Spikes")
         {
-            gameOverControl.GameOver();
+            gameControl.GameOver();
         }
     }
 
