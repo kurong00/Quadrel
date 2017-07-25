@@ -105,7 +105,7 @@ public class PlayerControl : Singleton<PlayerControl> {
         else
         {
             StartCoroutine(gameControl.GameOver(true));
-            gameObject.GetComponent<Rigidbody>().useGravity = true;
+            gameObject.AddComponent<Rigidbody>();
         }
         gameObject.transform.position = playerPos.position + new Vector3(0, 0.254f / 2, 0);
         dataManager.AddGameScore();

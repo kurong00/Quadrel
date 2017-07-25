@@ -24,8 +24,9 @@ public class MapManager : Singleton<MapManager> {
 	/// <summary>
 	/// 地图塌陷相关
 	/// </summary>
-	private int mapIndex = 0;
-	private float offSetZ = 0f;
+    [HideInInspector]
+	public int mapIndex = 0;
+	public float offSetZ = 0f;
 	/// <summary>
 	/// 主角相关
 	/// </summary>
@@ -54,7 +55,7 @@ public class MapManager : Singleton<MapManager> {
 	/// <summary>
 	/// 初始化地图
 	/// </summary>
-	void CreateMap(){
+	public void CreateMap(){
 		for (int i = 0; i < 10; i++)
         {
 			GameObject[] mapItem1 = new GameObject[6];
@@ -180,9 +181,9 @@ public class MapManager : Singleton<MapManager> {
             if (mapIndex == player.GetComponent<PlayerControl>().z)
             {
 				StopTileDown ();
-				CameraManager.Instance ().startFollow = false;
-				player.AddComponent<Rigidbody2D> ();
-				Destroy (player, 2f);
+                player.AddComponent<Rigidbody>();
+                CameraManager.Instance ().startFollow = false;
+                StartCoroutine(GameControl.Instance().GameOver(false));
 			}
 			mapIndex++;
 		}

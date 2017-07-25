@@ -10,7 +10,7 @@ public class CameraManager : Singleton<CameraManager> {
 	[HideInInspector]
 	public bool startFollow = false;
 
-	private Vector3 initPos;
+	public Vector3 initPos;
 
 
     void Start () {

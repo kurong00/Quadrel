@@ -93,6 +93,7 @@ public class GameUI : Singleton<GameUI> {
         gameControl.isPlaying = false;
         buttonPause.visible = false;
         buttonPlay.visible = true;
+        Time.timeScale = 0;
     }
     void ButtonPlayClick()
     {
@@ -102,6 +103,7 @@ public class GameUI : Singleton<GameUI> {
         PlayerControl.Instance().StartGame();
         buttonLeft.visible = true;
         buttonRight.visible = true;
+        Time.timeScale = 1;
     }
 
     void ButtonLeftClick()
@@ -120,6 +122,7 @@ public class GameUI : Singleton<GameUI> {
     {
         componentGameOver.visible = false;
         gameControl.ReStartGame();
+        componentNormal.visible = true;
     }
 
     public void GameOverScene()
@@ -127,5 +130,17 @@ public class GameUI : Singleton<GameUI> {
         componentNormal.visible = false;
         componentGameOver.visible = true;
         textEndScore.text = dataManager.gameScroe.ToString();
+    }
+
+    public void ButtonStopMove()
+    {
+        buttonRight.visible = false;
+        buttonLeft.visible = false;
+    }
+
+    public void ButtonBeginMove()
+    {
+        buttonRight.visible = true;
+        buttonLeft.visible = true;
     }
 }

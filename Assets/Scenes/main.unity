@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startFollow: 0
+  initPos: {x: 0, y: 0, z: 0}
 --- !u!1 &315299851
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,6 +359,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d10e89a62cdbc645816dafaf0c44c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapIndex: 0
+  offSetZ: 0
 --- !u!1001 &1646946709
 Prefab:
   m_ObjectHideFlags: 0
@@ -401,7 +404,8 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 54177686960984268, guid: ab0bb0d31621c744db70306890ed48ed, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: ab0bb0d31621c744db70306890ed48ed, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &2019020286

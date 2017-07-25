@@ -8,10 +8,11 @@ public class ProbabilityManager : Singleton<ProbabilityManager> {
     /// <summary>
     /// 坑洞陷阱概率，地面陷阱概率，天空陷阱概率，金币概率
     /// </summary>
-    private static int pb_hole = 0;
-    private static int pb_spikes = 0;
-    private static int pb_sky_spikes = 0;
-    private static int pb_coin = 2;
+    [HideInInspector]
+    public int pb_hole = 0;
+    public int pb_spikes = 0;
+    public int pb_sky_spikes = 0;
+    public int pb_coin = 2;
 
     /// <summary>
     /// 计算概率
