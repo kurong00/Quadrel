@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 6b25e7ba02983974b92d94b95e1fb677
-timeCreated: 1500961919
+guid: 6bdd3b361f2c6a440b7a524f1b028f34
+timeCreated: 1500961040
 licenseType: Free
 TrueTypeFontImporter:
   serializedVersion: 4
@@ -13,7 +13,7 @@ TrueTypeFontImporter:
   fontNames:
   - Blackentina 4F
   fallbackFontReferences:
-  - {fileID: 12800000, guid: 6bdd3b361f2c6a440b7a524f1b028f34, type: 3}
+  - {fileID: 12800000, guid: 6b25e7ba02983974b92d94b95e1fb677, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

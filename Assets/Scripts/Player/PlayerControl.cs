@@ -24,24 +24,22 @@ public class PlayerControl : Singleton<PlayerControl> {
         gameControl = GameControl.Instance();
     }
 
-    private void Start()
+    public void StartGame()
     {
-        //SetPlayerPosition();
+        CameraManager.Instance().startFollow = true;
+        SetPlayerPosition();
+        mapManager.StartTileDown();
     }
 
-    /*void Update () {
+    void Update ()
+    {
         if(!gameControl.isDead)
         {
-            CameraManager.Instance().startFollow = true;
-            if (gameControl.isPlaying)
-            {
-                mapManager.StartTileDown();
-                PlayerControll();
-            }
+            PlayerControll();
         }
-    }*/
+    }
 
-    void Update()
+    /*void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -50,7 +48,7 @@ public class PlayerControl : Singleton<PlayerControl> {
             mapManager.StartTileDown();
         }
         PlayerControll();
-    }
+    }*/
 
     void PlayerControll()
     {
@@ -106,7 +104,7 @@ public class PlayerControl : Singleton<PlayerControl> {
         }
         else
         {
-            gameControl.GameOver();
+            StartCoroutine(gameControl.GameOver(true));
             gameObject.GetComponent<Rigidbody>().useGravity = true;
         }
         gameObject.transform.position = playerPos.position + new Vector3(0, 0.254f / 2, 0);
@@ -122,7 +120,7 @@ public class PlayerControl : Singleton<PlayerControl> {
         }
         if(other.tag == "SkySpikes"|| other.tag == "Spikes")
         {
-            gameControl.GameOver();
+            StartCoroutine(gameControl.GameOver(false));
         }
     }
 

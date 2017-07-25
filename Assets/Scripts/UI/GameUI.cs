@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using FairyGUI;
 using FrameWork;
 
@@ -25,6 +26,7 @@ public class GameUI : Singleton<GameUI> {
     GButton buttonPlay;
     GButton buttonLeft;
     GButton buttonRight;
+    GButton buttonReplay;
     /// <summary>
     /// 游戏界面分数Text相关
     /// </summary>
@@ -32,6 +34,7 @@ public class GameUI : Singleton<GameUI> {
     GTextField textCoin;
     GTextField textEndScore;
     void Start () {
+        UIConfig.defaultFont = "Blackentina 4F";
         UIConstant = Constant.Instance();
         dataManager = DataManager.Instance();
         gameControl = GameControl.Instance();
@@ -50,6 +53,7 @@ public class GameUI : Singleton<GameUI> {
         textScore = componentNormal.GetChild("text_score").asTextField;
         textCoin = componentNormal.GetChild("text_coin").asTextField;
         textEndScore = componentGameOver.GetChild("text_end_score").asTextField;
+        buttonReplay = componentGameOver.GetChild("button_replay").asButton;
     }
 	
 	void Update ()
@@ -59,6 +63,7 @@ public class GameUI : Singleton<GameUI> {
         buttonSound.onClick.Add(ButtonSoundClick);
         buttonLeft.onClick.Add(ButtonLeftClick);
         buttonRight.onClick.Add(ButtonRightClick);
+        buttonReplay.onClick.Add(ButtonRePlayClick);
         RefreshScore();
     }
 
@@ -94,6 +99,9 @@ public class GameUI : Singleton<GameUI> {
         gameControl.isPlaying = true;
         buttonPause.visible = true;
         buttonPlay.visible = false;
+        PlayerControl.Instance().StartGame();
+        buttonLeft.visible = true;
+        buttonRight.visible = true;
     }
 
     void ButtonLeftClick()
@@ -106,6 +114,12 @@ public class GameUI : Singleton<GameUI> {
     {
         PlayerControl.Instance().GoRight();
         buttonRight.alpha = 0;
+    }
+
+    void ButtonRePlayClick()
+    {
+        componentGameOver.visible = false;
+        gameControl.ReStartGame();
     }
 
     public void GameOverScene()
