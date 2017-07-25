@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using FairyGUI;
+using FrameWork;
 
-public class GameUI : MonoBehaviour {
+public class GameUI : Singleton<GameUI> {
 
     /// <summary>
     /// 单例相关
@@ -15,6 +16,7 @@ public class GameUI : MonoBehaviour {
     /// UI中的组件相关
     /// </summary>
     GComponent componentNormal;
+    GComponent componentGameOver;
     /// <summary>
     /// 游戏界面UI按钮相关
     /// </summary>
@@ -28,6 +30,7 @@ public class GameUI : MonoBehaviour {
     /// </summary>
     GTextField textScore;
     GTextField textCoin;
+    GTextField textEndScore;
     void Start () {
         UIConstant = Constant.Instance();
         dataManager = DataManager.Instance();
@@ -36,6 +39,9 @@ public class GameUI : MonoBehaviour {
         UIPackage.AddPackage("UI/主界面");
         componentNormal = UIPackage.CreateObject("界面UI", "普通模式").asCom;
         GRoot.inst.AddChild(componentNormal);
+        componentGameOver = UIPackage.CreateObject("界面UI", "游戏结束").asCom;
+        GRoot.inst.AddChild(componentGameOver);
+        componentGameOver.visible = false;
         buttonSound = componentNormal.GetChild("button_sound").asButton;
         buttonPause = componentNormal.GetChild("button_pause").asButton;
         buttonPlay = componentNormal.GetChild("button_play").asButton;
@@ -43,6 +49,7 @@ public class GameUI : MonoBehaviour {
         buttonRight = componentNormal.GetChild("button_right").asButton;
         textScore = componentNormal.GetChild("text_score").asTextField;
         textCoin = componentNormal.GetChild("text_coin").asTextField;
+        textEndScore = componentGameOver.GetChild("text_end_score").asTextField;
     }
 	
 	void Update ()
@@ -99,5 +106,12 @@ public class GameUI : MonoBehaviour {
     {
         PlayerControl.Instance().GoRight();
         buttonRight.alpha = 0;
+    }
+
+    public void GameOverScene()
+    {
+        componentNormal.visible = false;
+        componentGameOver.visible = true;
+        textEndScore.text = dataManager.gameScroe.ToString();
     }
 }
