@@ -38,11 +38,11 @@ public class MapManager : Singleton<MapManager> {
         mapCoin = Resources.Load("coin") as GameObject;
         mapSkySpikes = Resources.Load("skySpikes") as GameObject;
         mapSpikes = Resources.Load("spikes") as GameObject;
-        mapColor = ColorManager.Instance().SelectColor(ColorManager.ScenesType.MONDAY);
+        mapColor = SceneTypeManager.Instance().SelectColor(SceneTypeManager.ScenesType.MONDAY);
         mapConstant = Constant.Instance();
         mapProbability = ProbabilityManager.Instance();
         CreateMap ();
-		player = GameObject.FindWithTag ("Player");
+        player = GameObject.Instantiate(Resources.Load(SceneTypeManager.Instance().playerName) as GameObject);
 	}
 
 	void Update () {

@@ -15,11 +15,14 @@ public class CameraManager : Singleton<CameraManager> {
 
     void Start () {
 		initPos = gameObject.transform.position;
-		player = GameObject.FindWithTag ("Player").GetComponent<Transform>();
-	}
+    }
 
 	void Update () {
-		if (startFollow) {
+        if(player==null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+        if (startFollow) {
 			Vector3 nextPos = new Vector3 (gameObject.transform.position.x, 
 				player.position.y + 1.5f, player.position.z);
 			gameObject.transform.position = Vector3.Lerp 
