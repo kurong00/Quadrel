@@ -25,7 +25,7 @@ public class SelectUI : MonoBehaviour {
         roleList = componentSelect.GetChild("list").asList;
         roleList.SetVirtualAndLoop();
         roleList.itemRenderer = RenderListItem;
-        roleList.numItems = 3;
+        roleList.numItems = 2;
         roleList.scrollPane.onScroll.Add(DoSpecialEffect);
         DoSpecialEffect();
     }
@@ -39,8 +39,8 @@ public class SelectUI : MonoBehaviour {
     void DoSpecialEffect()
     {
         float midX = roleList.scrollPane.posX + roleList.viewWidth / 2;
-        int cnt = roleList.numChildren;
-        for (int i = 0; i < cnt; i++)
+        int count = roleList.numChildren;
+        for (int i = 0; i < count; i++)
         {
             GObject obj = roleList.GetChildAt(i);
             float dist = Mathf.Abs(midX - obj.x - obj.width / 2);
@@ -48,10 +48,20 @@ public class SelectUI : MonoBehaviour {
                 obj.SetScale(1, 1);
             else
             {
-                float ss = 1 + (1 - dist / obj.width) * 0.24f;
-                obj.SetScale(ss, ss);
+                float scale = 1 + (1 - dist / obj.width) * 0.20f;
+                obj.SetScale(scale, scale);
             }
         }
+        ShowRoleName();
+    }
+
+    int ReturnIndex()
+    {
+        return ((roleList.GetFirstChildInView() + 1) % roleList.numItems);
+    }
+
+    void ShowRoleName()
+    {
         switch (ReturnIndex())
         {
             case 0:
@@ -64,10 +74,5 @@ public class SelectUI : MonoBehaviour {
                 componentSelect.GetChild("text_role_name").text = "Block";
                 break;
         }
-    }
-
-    int ReturnIndex()
-    {
-        return ((roleList.GetFirstChildInView() + 1) % roleList.numItems);
     }
 }

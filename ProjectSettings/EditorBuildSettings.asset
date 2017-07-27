@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 1838e9e6ffd194d428cdfa27149a12e9
+  - enabled: 1
+    path: Assets/Scenes/SelectRole.unity
+    guid: f7bb9559e85b7df40bca0985efcfe0d0
