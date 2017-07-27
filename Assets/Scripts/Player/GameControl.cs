@@ -31,7 +31,7 @@ public class GameControl : Singleton<GameControl> {
             yield return new WaitForSeconds(1.5f);
         if (!isDead)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.15f);
             Time.timeScale = 0;
             gameUI.GameOverScene();
             isDead = true;

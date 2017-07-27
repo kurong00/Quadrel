@@ -19,7 +19,7 @@ public class MusicManager : Singleton<MusicManager> {
         buttonMusic = Resources.Load("button") as AudioClip;
         audioSource = this.gameObject.AddComponent<AudioSource>();
         audioSource.loop = true;
-        audioSource.volume = 1.0f;
+        audioSource.volume = 0.5f;
         audioSource.clip = backgroundMusic;
         audioSource.Play();
     }

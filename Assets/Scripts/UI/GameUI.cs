@@ -28,6 +28,7 @@ public class GameUI : Singleton<GameUI> {
     GButton buttonLeft;
     GButton buttonRight;
     GButton buttonReplay;
+    GButton buttonQuit;
     /// <summary>
     /// 游戏界面分数Text相关
     /// </summary>
@@ -52,6 +53,7 @@ public class GameUI : Singleton<GameUI> {
         buttonPlay = componentNormal.GetChild("button_play").asButton;
         buttonLeft = componentNormal.GetChild("button_left").asButton;
         buttonRight = componentNormal.GetChild("button_right").asButton;
+        buttonQuit = componentNormal.GetChild("button_quit").asButton;
         textScore = componentNormal.GetChild("text_score").asTextField;
         textCoin = componentNormal.GetChild("text_coin").asTextField;
         textEndScore = componentGameOver.GetChild("text_end_score").asTextField;
@@ -66,6 +68,7 @@ public class GameUI : Singleton<GameUI> {
         buttonLeft.onClick.Add(ButtonLeftClick);
         buttonRight.onClick.Add(ButtonRightClick);
         buttonReplay.onClick.Add(ButtonRePlayClick);
+        buttonQuit.onClick.Add(ButtonQuitClick);
         RefreshScore();
     }
 
@@ -99,6 +102,7 @@ public class GameUI : Singleton<GameUI> {
         gameControl.isPlaying = false;
         buttonPause.visible = false;
         buttonPlay.visible = true;
+        buttonQuit.visible = true;
         Time.timeScale = 0;
     }
     void ButtonPlayClick()
@@ -107,6 +111,7 @@ public class GameUI : Singleton<GameUI> {
         gameControl.isPlaying = true;
         buttonPause.visible = true;
         buttonPlay.visible = false;
+        buttonQuit.visible = false;
         PlayerControl.Instance().StartGame();
         buttonLeft.visible = true;
         buttonRight.visible = true;
@@ -152,4 +157,10 @@ public class GameUI : Singleton<GameUI> {
         buttonRight.visible = true;
         buttonLeft.visible = true;
     }
+
+    public void ButtonQuitClick()
+    {
+        Application.Quit();
+    }
+    
 }

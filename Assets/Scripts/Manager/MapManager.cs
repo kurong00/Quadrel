@@ -170,7 +170,7 @@ public class MapManager : Singleton<MapManager> {
                 {
                     mapList[mapIndex][i].GetComponent<Spikes>().StopAllCoroutines();
                 }
-                if (mapList[mapIndex][i].transform.childCount > 1)
+                if (mapList[mapIndex][i].transform.childCount > 2)
                 {
                     PoolManager.PushObjectToPool(mapList[mapIndex][i].transform.GetChild(1),0.5f);
                 }
