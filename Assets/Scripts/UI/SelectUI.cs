@@ -33,7 +33,7 @@ public class SelectUI : MonoBehaviour {
     void RenderListItem(int index, GObject obj)
     {
         GButton item = (GButton)obj;
-        item.icon = UIPackage.GetItemURL("界面UI", "role" + index );
+        item.icon = UIPackage.GetItemURL("列表素材", "role" + index );
     }
 
     void DoSpecialEffect()

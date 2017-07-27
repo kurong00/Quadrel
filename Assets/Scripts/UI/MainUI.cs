@@ -55,7 +55,7 @@ public class MainUI : MonoBehaviour {
 
     void MainGameInitLoad()
     {
-        SceneManager.LoadScene("SelectRole");
+        SceneManager.LoadScene("Main");
         componentMain.visible = false;
     }
 

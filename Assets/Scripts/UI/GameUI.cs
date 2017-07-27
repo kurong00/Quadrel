@@ -10,6 +10,7 @@ public class GameUI : Singleton<GameUI> {
     /// <summary>
     /// 单例相关
     /// </summary>
+    private MusicManager musicManager;
     private Constant UIConstant;
     private DataManager dataManager;
     private GameControl gameControl;
@@ -38,6 +39,7 @@ public class GameUI : Singleton<GameUI> {
         UIConstant = Constant.Instance();
         dataManager = DataManager.Instance();
         gameControl = GameControl.Instance();
+        musicManager = MusicManager.Instance();
         GRoot.inst.SetContentScaleFactor(UIConstant.HEIGHT, UIConstant.WIDE);
         UIPackage.AddPackage("UI/主界面");
         componentNormal = UIPackage.CreateObject("界面UI", "普通模式").asCom;
@@ -85,11 +87,15 @@ public class GameUI : Singleton<GameUI> {
 
     void ButtonSoundClick()
     {
-        Debug.Log("点击了音量键");
+        if(musicManager.isPlayingMusic)
+            musicManager.StopMusic();
+        else
+            musicManager.PlayMusic();
     }
 
     void ButtonPauseClick()
     {
+        musicManager.PlayButtonSound();
         gameControl.isPlaying = false;
         buttonPause.visible = false;
         buttonPlay.visible = true;
@@ -97,6 +103,7 @@ public class GameUI : Singleton<GameUI> {
     }
     void ButtonPlayClick()
     {
+        musicManager.PlayButtonSound();
         gameControl.isPlaying = true;
         buttonPause.visible = true;
         buttonPlay.visible = false;
@@ -120,6 +127,7 @@ public class GameUI : Singleton<GameUI> {
 
     void ButtonRePlayClick()
     {
+        musicManager.PlayButtonSound();
         componentGameOver.visible = false;
         gameControl.ReStartGame();
         componentNormal.visible = true;
@@ -127,6 +135,7 @@ public class GameUI : Singleton<GameUI> {
 
     public void GameOverScene()
     {
+        musicManager.PlayLoseSound();
         componentNormal.visible = false;
         componentGameOver.visible = true;
         textEndScore.text = dataManager.gameScroe.ToString();

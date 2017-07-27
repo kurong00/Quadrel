@@ -39,17 +39,6 @@ public class PlayerControl : Singleton<PlayerControl> {
         }
     }
 
-    /*void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            CameraManager.Instance().startFollow = true;
-            SetPlayerPosition();
-            mapManager.StartTileDown();
-        }
-        PlayerControll();
-    }*/
-
     void PlayerControll()
     {
 		if(Input.GetKeyDown(KeyCode.A)){
@@ -117,6 +106,7 @@ public class PlayerControl : Singleton<PlayerControl> {
         {
             PoolManager.PushObjectToPool(other.gameObject.GetComponentInParent<Transform>());
             dataManager.AddCoinScore();
+            MusicManager.Instance().PlayMoneySound();
         }
         if(other.tag == "SkySpikes"|| other.tag == "Spikes")
         {
