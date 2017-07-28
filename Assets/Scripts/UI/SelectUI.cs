@@ -17,6 +17,7 @@ public class SelectUI : MonoBehaviour {
     /// </summary>
     GComponent componentSelect;
     void Start () {
+        Application.targetFrameRate = 60;
         UIConstant = Constant.Instance();
         GRoot.inst.SetContentScaleFactor(UIConstant.HEIGHT, UIConstant.WIDE);
         UIPackage.AddPackage("UI/主界面");
@@ -25,7 +26,7 @@ public class SelectUI : MonoBehaviour {
         roleList = componentSelect.GetChild("list").asList;
         roleList.SetVirtualAndLoop();
         roleList.itemRenderer = RenderListItem;
-        roleList.numItems = 2;
+        roleList.numItems = 3;
         roleList.scrollPane.onScroll.Add(DoSpecialEffect);
         DoSpecialEffect();
     }
@@ -33,7 +34,8 @@ public class SelectUI : MonoBehaviour {
     void RenderListItem(int index, GObject obj)
     {
         GButton item = (GButton)obj;
-        item.icon = UIPackage.GetItemURL("列表素材", "role" + index );
+        //item.pivot = new Vector2(0.5f, 0.5f);
+        item.icon = UIPackage.GetItemURL("界面UI", "role" + index);
     }
 
     void DoSpecialEffect()
@@ -48,7 +50,7 @@ public class SelectUI : MonoBehaviour {
                 obj.SetScale(1, 1);
             else
             {
-                float scale = 1 + (1 - dist / obj.width) * 0.20f;
+                float scale = 1 + (1 - dist / obj.width) * 0.25f;
                 obj.SetScale(scale, scale);
             }
         }
