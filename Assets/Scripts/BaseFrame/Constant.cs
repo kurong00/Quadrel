@@ -41,6 +41,6 @@ public class Constant :Singleton<Constant>
     /// <summary>
     /// 挑战模式
     /// </summary>
-    public float ALLTIME = 5f;
+    public float ALLTIME = 30f;
 
 }

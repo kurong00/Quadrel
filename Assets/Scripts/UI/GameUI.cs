@@ -36,6 +36,11 @@ public class GameUI : Singleton<GameUI> {
     GTextField textCoin;
     GTextField textEndScore;
     GTextField textTime;
+    /// <summary>
+    /// 倒计时相关
+    /// </summary>
+    GImage clock;
+    Transition clockTransition;
     void Start () {
         UIConfig.defaultFont = "Blackentina 4F";
         UIConstant = Constant.Instance();
@@ -58,11 +63,14 @@ public class GameUI : Singleton<GameUI> {
         textScore = componentNormal.GetChild("text_score").asTextField;
         textCoin = componentNormal.GetChild("text_coin").asTextField;
         textTime = componentNormal.GetChild("text_time").asTextField;
+        clock = componentNormal.GetChild("clock").asImage;
         textEndScore = componentGameOver.GetChild("text_end_score").asTextField;
         buttonReplay = componentGameOver.GetChild("button_replay").asButton;
+        clockTransition = componentNormal.GetTransition("clock_t");
         if(SceneTypeManager.Instance().GameMode==Constant.Instance().CHANLLENGE)
         {
             textTime.visible = true;
+            clock.visible = true;
             StartCoroutine(CountTime());
         }
     }
@@ -182,6 +190,10 @@ public class GameUI : Singleton<GameUI> {
             {
                 yield return new WaitForSeconds(1);
                 gameControl.nowTime--;
+                if(gameControl.nowTime <= 5)
+                {
+                    clockTransition.Play();
+                }
                 if (gameControl.nowTime == 0)
                 {
                     StartCoroutine(gameControl.GameOver(false));
