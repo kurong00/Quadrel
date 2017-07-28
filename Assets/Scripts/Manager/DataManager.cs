@@ -12,12 +12,7 @@ public class DataManager : Singleton<DataManager> {
         gameScroe = 0;
         coinScroe = PlayerPrefs.GetInt("COIN_SCORE", 0);
     }
-
-    private void Update()
-    {
-        /*Debug.Log("<color=darkblue>"+gameScroe + "datamanager1" + "</color>");
-        Debug.Log("<color=#000000>" + coinScroe + "datamanager2" + "</color>");*/
-    }
+    
 
     public void AddGameScore ()
     {
@@ -41,12 +36,22 @@ public class DataManager : Singleton<DataManager> {
 
     public void SaveScore()
     {
-        PlayerPrefs.SetInt("LAST_GAME_SCORE", gameScroe);
         PlayerPrefs.SetInt("COIN_SCORE", coinScroe);
-        if(gameScroe> PlayerPrefs.GetInt("BEST_GAME_SCORE", 0))
+        if (SceneTypeManager.Instance().GameMode==Constant.Instance().CHANLLENGE)
         {
-            PlayerPrefs.SetInt("BEST_GAME_SCORE", gameScroe);
+            PlayerPrefs.SetInt("LAST_GAME_CHANLLENGE_SCORE", gameScroe);
+            if (gameScroe > PlayerPrefs.GetInt("BEST_GAME_CHANLLENGE_SCORE", 0))
+            {
+                PlayerPrefs.SetInt("BEST_GAME_CHANLLENGE_SCORE", gameScroe);
+            }
         }
-        
+        else
+        {
+            PlayerPrefs.SetInt("LAST_GAME_SCORE", gameScroe);
+            if (gameScroe > PlayerPrefs.GetInt("BEST_GAME_SCORE", 0))
+            {
+                PlayerPrefs.SetInt("BEST_GAME_SCORE", gameScroe);
+            }
+        }
     }
 }

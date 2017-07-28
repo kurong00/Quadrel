@@ -33,4 +33,14 @@ public class Constant :Singleton<Constant>
     public string KEY_LAST_GAME_SCORE = "LAST_GAME_SCORE";
     public string KEY_BEST_GAME_SCORE = "BEST_GAME_SCORE";
     public string KEY_COIN_SCORE = "COIN_SCORE";
+    /// <summary>
+    /// 游戏类型
+    /// </summary>
+    public int NORMAL = 0;
+    public int CHANLLENGE = 1;
+    /// <summary>
+    /// 挑战模式
+    /// </summary>
+    public float ALLTIME = 5f;
+
 }

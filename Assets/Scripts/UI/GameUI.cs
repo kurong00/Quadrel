@@ -35,6 +35,7 @@ public class GameUI : Singleton<GameUI> {
     GTextField textScore;
     GTextField textCoin;
     GTextField textEndScore;
+    GTextField textTime;
     void Start () {
         UIConfig.defaultFont = "Blackentina 4F";
         UIConstant = Constant.Instance();
@@ -56,8 +57,14 @@ public class GameUI : Singleton<GameUI> {
         buttonQuit = componentNormal.GetChild("button_quit").asButton;
         textScore = componentNormal.GetChild("text_score").asTextField;
         textCoin = componentNormal.GetChild("text_coin").asTextField;
+        textTime = componentNormal.GetChild("text_time").asTextField;
         textEndScore = componentGameOver.GetChild("text_end_score").asTextField;
         buttonReplay = componentGameOver.GetChild("button_replay").asButton;
+        if(SceneTypeManager.Instance().GameMode==Constant.Instance().CHANLLENGE)
+        {
+            textTime.visible = true;
+            StartCoroutine(CountTime());
+        }
     }
 	
 	void Update ()
@@ -69,13 +76,17 @@ public class GameUI : Singleton<GameUI> {
         buttonRight.onClick.Add(ButtonRightClick);
         buttonReplay.onClick.Add(ButtonRePlayClick);
         buttonQuit.onClick.Add(ButtonQuitClick);
-        RefreshScore();
+        RefreshUI();
     }
 
-    public void RefreshScore()
+    public void RefreshUI()
     {
         textScore.text = dataManager.gameScroe.ToString();
         textCoin.text = dataManager.coinScroe.ToString();
+        if (textTime.visible)
+        {
+            textTime.text = gameControl.nowTime.ToString();
+        }
     }
 
     public void RefreshGameScore(int score)
@@ -163,4 +174,19 @@ public class GameUI : Singleton<GameUI> {
         Application.Quit();
     }
     
+    IEnumerator CountTime()
+    {
+        while (true)
+        {
+            if (gameControl.nowTime >= 0)
+            {
+                yield return new WaitForSeconds(1);
+                gameControl.nowTime--;
+                if (gameControl.nowTime == 0)
+                {
+                    StartCoroutine(gameControl.GameOver(false));
+                }
+            }
+        }
+    }
 }

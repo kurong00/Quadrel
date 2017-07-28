@@ -25,12 +25,13 @@ namespace FrameWork{
 						instanceGO = new GameObject (instanceName);
 					instance = instanceGO.AddComponent<T> ();
 					//保证重新加载场景的时候实例不会被释放
-					//DontDestroyOnLoad (instanceGO);
+					DontDestroyOnLoad (instanceGO);
 					Debug.Log ("add new singleTon" + instance.name + " in the game");	
 				}
 			} 
 			else
 				Debug.Log ("already exit " + instance.name + " in the game");
+            //instance.enabled = false;
 			return instance;
 		}
 		protected virtual void OnDestory()

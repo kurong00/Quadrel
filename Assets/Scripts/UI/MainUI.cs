@@ -46,6 +46,7 @@ public class MainUI : MonoBehaviour {
     void LoadChanllengeScene()
     {
         MainGameInitLoad();
+        SceneTypeManager.Instance().GameMode = Constant.Instance().CHANLLENGE;
     }
 
     void GameExit()

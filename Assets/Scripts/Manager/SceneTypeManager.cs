@@ -7,6 +7,9 @@ public class SceneTypeManager : Singleton<SceneTypeManager>{
 
 	GameColor colorList = new GameColor();
 
+    public int GameMode = 0;
+    
+
     public string playerName = "mushroom";
     public enum ScenesType
 	{

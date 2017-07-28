@@ -15,6 +15,12 @@ public class GameControl : Singleton<GameControl> {
     private DataManager dataManager;
     private ProbabilityManager probabilityManager;
 
+    /// <summary>
+    /// 挑战模式
+    /// </summary>
+    public float allTime;
+    public float nowTime = 0;
+
     private void Start()
     {
         gameUI = GameUI.Instance();
@@ -23,6 +29,8 @@ public class GameControl : Singleton<GameControl> {
         mapManager = MapManager.Instance();
         dataManager = DataManager.Instance();
         probabilityManager = ProbabilityManager.Instance();
+        allTime = Constant.Instance().ALLTIME;
+        nowTime = allTime;
     }
     public IEnumerator GameOver(bool isFall)
     {
@@ -42,6 +50,7 @@ public class GameControl : Singleton<GameControl> {
     public void ReStartGame()
     {
         gameUI.ButtonBeginMove();
+        ResetTime();
         dataManager.gameScroe = 0;
         ResetProbability();
         ResetMap();
@@ -85,5 +94,10 @@ public class GameControl : Singleton<GameControl> {
         probabilityManager.pb_hole = 0;
         probabilityManager.pb_sky_spikes = 0;
         probabilityManager.pb_spikes = 0;
+    }
+
+    private void ResetTime()
+    {
+        nowTime = allTime;
     }
 }
