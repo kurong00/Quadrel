@@ -33,7 +33,7 @@ public class SelectUI : MonoBehaviour {
         roleList.GetChildAt(1).onClick.Add(SelectCheese);
         roleList.GetChildAt(2).onClick.Add(SelectBlock);
         roleList.GetChildAt(3).onClick.Add(SelectSushi);
-        roleList.GetChildAt(4).onClick.Add(SelectBrick);
+        roleList.GetChildAt(4).onClick.Add(SelectCake);
         roleList.GetChildAt(5).onClick.Add(SelectWatermelon);
         roleList.GetChildAt(6).onClick.Add(SelectBread);
     }
@@ -86,7 +86,7 @@ public class SelectUI : MonoBehaviour {
                 componentSelect.GetChild("text_role_name").text = "Sushi";
                 break;
             case 4:
-                componentSelect.GetChild("text_role_name").text = "Brick";
+                componentSelect.GetChild("text_role_name").text = "Cake";
                 break;
             case 5:
                 componentSelect.GetChild("text_role_name").text = "Watermelon";
@@ -121,7 +121,7 @@ public class SelectUI : MonoBehaviour {
         LoadGame();
     }
 
-    void SelectBrick()
+    void SelectCake()
     {
         SceneTypeManager.Instance().currentType = SceneTypeManager.ScenesType.FRIDAY;
         LoadGame();

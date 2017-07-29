@@ -66,7 +66,7 @@ public class SceneTypeManager : Singleton<SceneTypeManager>
                 colorList.colorOfSpikes = new Color(255 / 255f, 168 / 255f, 0 / 255f);
                 break;
             case ScenesType.FRIDAY:
-                playerName = "cube_brick";
+                playerName = "cube_cake";
                 colorList.colorOfTileOne = new Color(206 / 255f, 136 / 255f, 136 / 255f);
                 colorList.colorOfTileTwo = new Color(188 / 255f, 117 / 255f, 117 / 255f);
                 colorList.colorOfWall = new Color(53 / 255f, 23 / 255f, 19 / 255f);
@@ -85,12 +85,12 @@ public class SceneTypeManager : Singleton<SceneTypeManager>
                 break;
             case ScenesType.SUNDAY:
                 playerName = "cube_bread";
-                colorList.colorOfTileOne = new Color(140 / 255f, 126 / 255f, 120 / 255f);
-                colorList.colorOfTileTwo = new Color(191 / 255f, 166 / 255f, 149 / 255f);
-                colorList.colorOfWall = new Color(193 / 255f, 104 / 255f, 93 / 255f);
-                colorList.colorOfMeshRenderOne = new Color(140 / 255f, 126 / 255f, 120 / 255f);
-                colorList.colorOfMeshRenderTwo = new Color(140 / 255f, 126 / 255f, 120 / 255f);
-                colorList.colorOfSpikes = new Color(255 / 255f, 67 / 255f, 70 / 255f);
+                colorList.colorOfTileOne = new Color(152 / 255f, 94 / 255f, 56 / 255f);
+                colorList.colorOfTileTwo = new Color(186 / 255f, 134 / 255f, 101 / 255f);
+                colorList.colorOfWall = new Color(255 / 255f, 146 / 255f, 52 / 255f);
+                colorList.colorOfMeshRenderOne = new Color(86 / 255f, 30 / 255f, 3 / 255f);
+                colorList.colorOfMeshRenderTwo = new Color(232 / 255f, 170 / 255f, 140 / 255f);
+                colorList.colorOfSpikes = new Color(98 / 255f, 59 / 255f, 28 / 255f);
                 break;
         }
         return colorList;
