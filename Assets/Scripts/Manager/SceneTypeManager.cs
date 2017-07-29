@@ -54,34 +54,34 @@ public class SceneTypeManager : Singleton<SceneTypeManager>
                 colorList.colorOfWall = new Color(47 / 255f, 48 / 255f, 50 / 255f);
                 colorList.colorOfMeshRenderOne = new Color(47 / 255f, 48 / 255f, 50 / 255f);
                 colorList.colorOfMeshRenderTwo = new Color(140 / 255f, 126 / 255f, 120 / 255f);
-                colorList.colorOfSpikes = new Color(255 / 255f, 132 / 255f, 124 / 255f);
+                colorList.colorOfSpikes = new Color(255 / 255f, 11 / 255f, 67 / 255f);
                 break;
             case ScenesType.THURSDAY:
                 playerName = "cube_sushi";
-                colorList.colorOfTileOne = new Color(140 / 255f, 126 / 255f, 120 / 255f);
-                colorList.colorOfTileTwo = new Color(191 / 255f, 166 / 255f, 149 / 255f);
-                colorList.colorOfWall = new Color(193 / 255f, 104 / 255f, 93 / 255f);
-                colorList.colorOfMeshRenderOne = new Color(140 / 255f, 126 / 255f, 120 / 255f);
-                colorList.colorOfMeshRenderTwo = new Color(140 / 255f, 126 / 255f, 120 / 255f);
-                colorList.colorOfSpikes = new Color(255 / 255f, 67 / 255f, 70 / 255f);
+                colorList.colorOfTileOne = new Color(56 / 255f, 68 / 255f, 56 / 255f);
+                colorList.colorOfTileTwo =  new Color(204 / 255f, 187 / 255f, 161 / 255f);
+                colorList.colorOfWall = new Color(0 / 255f, 0 / 255f, 0 / 255f);
+                colorList.colorOfMeshRenderOne = new Color(114 / 255f, 126 / 255f, 107 / 255f);
+                colorList.colorOfMeshRenderTwo = new Color(0 / 255f, 9 / 255f, 2 / 255f);
+                colorList.colorOfSpikes = new Color(255 / 255f, 168 / 255f, 0 / 255f);
                 break;
             case ScenesType.FRIDAY:
                 playerName = "cube_brick";
-                colorList.colorOfTileOne = new Color(140 / 255f, 126 / 255f, 120 / 255f);
-                colorList.colorOfTileTwo = new Color(191 / 255f, 166 / 255f, 149 / 255f);
-                colorList.colorOfWall = new Color(193 / 255f, 104 / 255f, 93 / 255f);
-                colorList.colorOfMeshRenderOne = new Color(140 / 255f, 126 / 255f, 120 / 255f);
-                colorList.colorOfMeshRenderTwo = new Color(140 / 255f, 126 / 255f, 120 / 255f);
-                colorList.colorOfSpikes = new Color(255 / 255f, 67 / 255f, 70 / 255f);
+                colorList.colorOfTileOne = new Color(206 / 255f, 136 / 255f, 136 / 255f);
+                colorList.colorOfTileTwo = new Color(188 / 255f, 117 / 255f, 117 / 255f);
+                colorList.colorOfWall = new Color(53 / 255f, 23 / 255f, 19 / 255f);
+                colorList.colorOfMeshRenderOne = new Color(120 / 255f, 52 / 255f, 52 / 255f);
+                colorList.colorOfMeshRenderTwo = new Color(68 / 255f, 11 / 255f, 12 / 255f);
+                colorList.colorOfSpikes = new Color(60 / 255f, 0 / 255f, 0 / 255f);
                 break;
             case ScenesType.SATERDAY:
                 playerName = "cube_watermelon";
-                colorList.colorOfTileOne = new Color(140 / 255f, 126 / 255f, 120 / 255f);
-                colorList.colorOfTileTwo = new Color(191 / 255f, 166 / 255f, 149 / 255f);
-                colorList.colorOfWall = new Color(193 / 255f, 104 / 255f, 93 / 255f);
-                colorList.colorOfMeshRenderOne = new Color(140 / 255f, 126 / 255f, 120 / 255f);
-                colorList.colorOfMeshRenderTwo = new Color(140 / 255f, 126 / 255f, 120 / 255f);
-                colorList.colorOfSpikes = new Color(255 / 255f, 67 / 255f, 70 / 255f);
+                colorList.colorOfTileOne = new Color(255 / 255f, 189 / 255f, 196 / 255f);
+                colorList.colorOfTileTwo = new Color(227 / 255f, 102 / 255f, 102 / 255f);
+                colorList.colorOfWall = new Color(6 / 255f, 79 / 255f, 30 / 255f);
+                colorList.colorOfMeshRenderOne = new Color(120 / 255f, 52 / 255f, 52 / 255f);
+                colorList.colorOfMeshRenderTwo = new Color(68 / 255f, 11 / 255f, 12 / 255f);
+                colorList.colorOfSpikes = new Color(43 / 255f, 24 / 255f, 0 / 255f);
                 break;
             case ScenesType.SUNDAY:
                 playerName = "cube_bread";
