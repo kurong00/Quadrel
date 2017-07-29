@@ -18,7 +18,7 @@ public class PlayerControl : Singleton<PlayerControl> {
     private GameControl gameControl;
     private DataManager dataManager;
     void Awake () {
-		playerPosColor = SceneTypeManager.Instance ().SelectColor (SceneTypeManager.ScenesType.MONDAY);
+		playerPosColor = SceneTypeManager.Instance ().SelectColor (SceneTypeManager.Instance().currentType);
 		mapManager =  MapManager.Instance();
         dataManager = DataManager.Instance();
         gameControl = GameControl.Instance();

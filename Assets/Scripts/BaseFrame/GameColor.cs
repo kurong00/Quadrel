@@ -8,7 +8,7 @@ namespace FrameWork
 {
 	public class GameColor
 	{
-		public Color colorOfTileOne,colorOfTileTwo,colorOfWall,colorOfMeshRenderOne,colorOfMeshRenderTwo;
+        public Color colorOfTileOne, colorOfTileTwo, colorOfWall, colorOfMeshRenderOne, colorOfMeshRenderTwo, colorOfSpikes;
 		public GameColor ()
 		{
 			colorOfTileOne = Color.white;
@@ -16,7 +16,8 @@ namespace FrameWork
 			colorOfWall = Color.white;
 			colorOfMeshRenderOne = Color.white;
 			colorOfMeshRenderTwo = Color.white;
-		}
+            colorOfSpikes = Color.white;
+        }
 	}
 }
 

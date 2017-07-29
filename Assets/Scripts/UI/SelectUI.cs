@@ -26,15 +26,22 @@ public class SelectUI : MonoBehaviour {
         roleList = componentSelect.GetChild("list").asList;
         roleList.SetVirtualAndLoop();
         roleList.itemRenderer = RenderListItem;
-        roleList.numItems = 3;
+        roleList.numItems = 7;
         roleList.scrollPane.onScroll.Add(DoSpecialEffect);
         DoSpecialEffect();
+        roleList.GetChildAt(0).onClick.Add(SelectMushRoom);
+        roleList.GetChildAt(1).onClick.Add(SelectCheese);
+        roleList.GetChildAt(2).onClick.Add(SelectBlock);
+        roleList.GetChildAt(3).onClick.Add(SelectSushi);
+        roleList.GetChildAt(4).onClick.Add(SelectBrick);
+        roleList.GetChildAt(5).onClick.Add(SelectWatermelon);
+        roleList.GetChildAt(6).onClick.Add(SelectBread);
     }
 
     void RenderListItem(int index, GObject obj)
     {
         GButton item = (GButton)obj;
-        //item.pivot = new Vector2(0.5f, 0.5f);
+        item.pivot = new Vector2(0.5f, 0.5f);
         item.icon = UIPackage.GetItemURL("界面UI", "role" + index);
     }
 
@@ -59,7 +66,7 @@ public class SelectUI : MonoBehaviour {
 
     int ReturnIndex()
     {
-        return ((roleList.GetFirstChildInView() + 1) % roleList.numItems);
+        return ((roleList.GetFirstChildInView()+2) % roleList.numItems);
     }
 
     void ShowRoleName()
@@ -75,6 +82,66 @@ public class SelectUI : MonoBehaviour {
             case 2:
                 componentSelect.GetChild("text_role_name").text = "Block";
                 break;
+            case 3:
+                componentSelect.GetChild("text_role_name").text = "Sushi";
+                break;
+            case 4:
+                componentSelect.GetChild("text_role_name").text = "Brick";
+                break;
+            case 5:
+                componentSelect.GetChild("text_role_name").text = "Watermelon";
+                break;
+            case 6:
+                componentSelect.GetChild("text_role_name").text = "Bread";
+                break;
         }
+    }
+
+    void SelectMushRoom()
+    {
+        SceneTypeManager.Instance().currentType = SceneTypeManager.ScenesType.MONDAY;
+        LoadGame();
+    }
+
+    void SelectCheese()
+    {
+        SceneTypeManager.Instance().currentType = SceneTypeManager.ScenesType.TUESDAY;
+        LoadGame();
+    }
+
+    void SelectBlock()
+    {
+        SceneTypeManager.Instance().currentType = SceneTypeManager.ScenesType.WENESDAY;
+        LoadGame();
+    }
+
+    void SelectSushi()
+    {
+        SceneTypeManager.Instance().currentType = SceneTypeManager.ScenesType.THURSDAY;
+        LoadGame();
+    }
+
+    void SelectBrick()
+    {
+        SceneTypeManager.Instance().currentType = SceneTypeManager.ScenesType.FRIDAY;
+        LoadGame();
+    }
+
+    void SelectWatermelon()
+    {
+        SceneTypeManager.Instance().currentType = SceneTypeManager.ScenesType.SATERDAY;
+        LoadGame();
+    }
+
+    void SelectBread()
+    {
+        SceneTypeManager.Instance().currentType = SceneTypeManager.ScenesType.SUNDAY;
+        LoadGame();
+    }
+
+    void LoadGame()
+    {
+        componentSelect.visible = false;
+        SceneManager.LoadScene("Main");
     }
 }

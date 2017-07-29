@@ -30,7 +30,7 @@ GameObject:
   - component: {fileID: 3307374}
   - component: {fileID: 2340602}
   m_Layer: 0
-  m_Name: skySpikes_a
+  m_Name: spikes_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

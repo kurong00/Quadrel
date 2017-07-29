@@ -1,15 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FrameWork;
 
 public class Spikes : MonoBehaviour {
 
     private Transform childTransfrom;
+    private SceneTypeManager sceneManager;
+    private Transform childTransfrom2;
     private Constant spikesConstant;
     private Vector3 initPos;
     private Vector3 nextPos;
+    private GameColor mySpikes;
 	void Start () {
+        sceneManager = SceneTypeManager.Instance();
+        mySpikes = sceneManager.SelectColor(sceneManager.currentType);
         childTransfrom = transform.Find("spikes_b").GetComponent<Transform>();
+        childTransfrom2 = transform.Find("spikes_a").GetComponent<Transform>();
+        gameObject.GetComponent<MeshRenderer>().material.color = mySpikes.colorOfSpikes;
+        childTransfrom.gameObject.GetComponent<MeshRenderer>().material.color = mySpikes.colorOfSpikes;
+        childTransfrom2.gameObject.GetComponent<MeshRenderer>().material.color = mySpikes.colorOfSpikes;
         initPos = childTransfrom.position;
         if (transform.gameObject.tag == "SkySpikes")
         {

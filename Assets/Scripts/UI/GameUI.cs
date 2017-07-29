@@ -67,7 +67,14 @@ public class GameUI : Singleton<GameUI> {
         textEndScore = componentGameOver.GetChild("text_end_score").asTextField;
         buttonReplay = componentGameOver.GetChild("button_replay").asButton;
         clockTransition = componentNormal.GetTransition("clock_t");
-        if(SceneTypeManager.Instance().GameMode==Constant.Instance().CHANLLENGE)
+        buttonPlay.onClick.Add(ButtonPlayClick);
+        buttonPause.onClick.Add(ButtonPauseClick);
+        buttonSound.onClick.Add(ButtonSoundClick);
+        buttonLeft.onClick.Add(ButtonLeftClick);
+        buttonRight.onClick.Add(ButtonRightClick);
+        buttonReplay.onClick.Add(ButtonRePlayClick);
+        buttonQuit.onClick.Add(ButtonQuitClick);
+        if (SceneTypeManager.Instance().GameMode==Constant.Instance().CHANLLENGE)
         {
             textTime.visible = true;
             clock.visible = true;
@@ -77,13 +84,6 @@ public class GameUI : Singleton<GameUI> {
 	
 	void Update ()
     {
-        buttonPlay.onClick.Add(ButtonPlayClick);
-        buttonPause.onClick.Add(ButtonPauseClick);
-        buttonSound.onClick.Add(ButtonSoundClick);
-        buttonLeft.onClick.Add(ButtonLeftClick);
-        buttonRight.onClick.Add(ButtonRightClick);
-        buttonReplay.onClick.Add(ButtonRePlayClick);
-        buttonQuit.onClick.Add(ButtonQuitClick);
         RefreshUI();
     }
 

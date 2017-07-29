@@ -38,7 +38,7 @@ public class MapManager : Singleton<MapManager> {
         mapCoin = Resources.Load("coin") as GameObject;
         mapSkySpikes = Resources.Load("skySpikes") as GameObject;
         mapSpikes = Resources.Load("spikes") as GameObject;
-        mapColor = SceneTypeManager.Instance().SelectColor(SceneTypeManager.ScenesType.MONDAY);
+        mapColor = SceneTypeManager.Instance().SelectColor(SceneTypeManager.Instance().currentType);
         mapConstant = Constant.Instance();
         mapProbability = ProbabilityManager.Instance();
         CreateMap ();
