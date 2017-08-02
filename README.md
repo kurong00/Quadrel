@@ -15,7 +15,7 @@ Unity 2017.1.0f3 (64-bit)
 
 **运行效果：**
 
-![image](https://github.com/kurong00/Quadrel_Unity/blob/master/normalGIF.gif )     
+![image](https://github.com/kurong00/Quadrel_Unity/blob/master/Picture/normalGIF.gif )     
 
 
 
@@ -43,10 +43,10 @@ Unity 2017.1.0f3 (64-bit)
 
 **场景截图：**  
 
-![image](https://github.com/kurong00/Quadrel_Unity/blob/master/mushroom.PNG ) 
-![image](https://github.com/kurong00/Quadrel_Unity/blob/master/cheese.PNG ) 
-![image](https://github.com/kurong00/Quadrel_Unity/blob/master/block.PNG ) 
-![image](https://github.com/kurong00/Quadrel_Unity/blob/master/sushi.PNG ) 
-![image](https://github.com/kurong00/Quadrel_Unity/blob/master/cake.PNG ) 
-![image](https://github.com/kurong00/Quadrel_Unity/blob/master/watermelon.PNG ) 
-![image](https://github.com/kurong00/Quadrel_Unity/blob/master/bread.PNG ) 
+![image](https://github.com/kurong00/Quadrel_Unity/blob/master/Picture/mushroom.PNG ) 
+![image](https://github.com/kurong00/Quadrel_Unity/blob/master/Picture/cheese.PNG ) 
+![image](https://github.com/kurong00/Quadrel_Unity/blob/master/Picture/block.PNG ) 
+![image](https://github.com/kurong00/Quadrel_Unity/blob/master/Picture/sushi.PNG ) 
+![image](https://github.com/kurong00/Quadrel_Unity/blob/master/Picture/cake.PNG ) 
+![image](https://github.com/kurong00/Quadrel_Unity/blob/master/Picture/watermelon.PNG ) 
+![image](https://github.com/kurong00/Quadrel_Unity/blob/master/Picture/bread.PNG ) 
