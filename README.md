@@ -8,6 +8,11 @@ Unity 2017.1.0f3 (64-bit)
 
 一个简单的跑酷类游戏demo，现在有普通模式|挑战模式，挑战模式为30s倒计时，选择角色目前内置了7种不同的场景和角色  
 
+**平台：**  
+
+运行在Android手机平台，Apk下载：[GitHub Pages](https://github.com/kurong00/Quadrel_Unity/blob/master/QUADREL.apk)
+
+
 **运行效果：**
 
 ![image](https://github.com/kurong00/Quadrel_Unity/blob/master/normalGIF.gif )     
