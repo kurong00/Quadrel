@@ -37,7 +37,7 @@ Unity 2017.1.0f3 (64-bit)
 
 1.游戏的UI用FairyGUI制作  
 
-2.游戏中用到的素材文件都在Quadrel_Art[点我转素材文件](https://github.com/kurong00/Quadrel_Art).  
+2.游戏中用到的素材图片，源文件都在另一个repository：[Quadrel_Art](https://github.com/kurong00/Quadrel_Art).  
 
 
 
