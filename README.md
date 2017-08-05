@@ -10,7 +10,7 @@ Unity 2017.1.0f3 (64-bit)
 
 **平台：**  
 
-运行在Android手机平台，Apk下载：[GitHub Pages](https://github.com/kurong00/Quadrel_Unity/blob/master/QUADREL.apk)
+运行在Android手机平台，Apk下载：[Apks](https://github.com/kurong00/Quadrel_Unity/blob/master/QUADREL.apk)
 
 
 **运行效果：**
