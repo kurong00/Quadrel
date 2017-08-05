@@ -10,7 +10,7 @@ Unity 2017.1.0f3 (64-bit)
 
 **平台：**  
 
-运行在Android手机平台，Apk下载：[Apks](https://github.com/kurong00/Quadrel_Unity/blob/master/QUADREL.apk)
+运行在Android手机平台，Apk下载：[点我下载](https://github.com/kurong00/Quadrel_Unity/blob/master/QUADREL.apk)
 
 
 **运行效果：**
@@ -26,7 +26,7 @@ Unity 2017.1.0f3 (64-bit)
 
 2.游戏中用到的Manager都用了单例模式，修改场景中的所有颜色在SceneTypeManager  
 
-3游戏中用到简单的对象池，代码在ObjectPool文件夹下  .
+3.游戏中用到简单的对象池，代码在ObjectPool文件夹下  .
 
 
 
@@ -37,7 +37,7 @@ Unity 2017.1.0f3 (64-bit)
 
 1.游戏的UI用FairyGUI制作  
 
-2.游戏中用到的素材文件都在Quadrel_Art[GitHub Pages](https://github.com/kurong00/Quadrel_Art).  
+2.游戏中用到的素材文件都在Quadrel_Art[点我转素材文件](https://github.com/kurong00/Quadrel_Art).  
 
 
 
